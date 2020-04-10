@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/cl"
+    android:background="@drawable/login">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame"
+      >
+    <LinearLayout
+        android:id="@+id/ll"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="120dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="35dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+
+        <EditText
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@android:color/white" />
+
+
+        <!-- Password Label -->
+
+        <EditText
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColorHint="#FFFFFF" />
+
+
+       <Button
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+
+            android:text="Login"/>
+
+        <TextView
+            android:id="@+id/link_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="No account yet? Create one"
+            android:textColor="#FFFFFF"
+            android:textSize="16dip" />
+        <TextView
+            android:id="@+id/link_forgotPassword"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="forgot password ?"
+            android:textColor="#FFFFFF"
+            android:textSize="16dip" />
+        <Button
+
+            android:id="@+id/btn_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="45dp"
+            android:padding="12dp"
+            android:text="Signup"/>
+
+
+    </LinearLayout>
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
