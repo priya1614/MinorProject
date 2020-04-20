@@ -4,9 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".signup"
+    tools:context=".SignUp"
     android:background="@drawable/login">
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/ll"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center">
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:foregroundGravity="center"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher_round"
+       />
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn"
+            android:text="choose profile picture"
+            ></Button>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"

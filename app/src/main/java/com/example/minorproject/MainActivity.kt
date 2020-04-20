@@ -31,11 +31,12 @@ class MainActivity : AppCompatActivity() {
         su = findViewById<View>(R.id.btn_signup) as Button
         auth = FirebaseAuth.getInstance()
         su!!.setOnClickListener {
-            Log.d("val", "kuch b")
+
             val fm = supportFragmentManager
             val ft = fm.beginTransaction()
-            val signup: Fragment = signup()
+            val signup: Fragment = SignUp()
             ft.add(R.id.cl, signup)
+            ft.addToBackStack("frag1")
             ft.commit()
         }
         login!!.setOnClickListener {
@@ -51,11 +52,12 @@ class MainActivity : AppCompatActivity() {
                             if (task.isSuccessful) { // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success")
                                 Toast.makeText(this@MainActivity, "Authentication success.", Toast.LENGTH_SHORT).show()
+
                                 val user = auth.getCurrentUser()
                                 updateUI(user)
                             } else { // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.exception)
-                                Toast.makeText(this@MainActivity, "Authentication failed.",
+                                Toast.makeText(this@MainActivity, "email id or password are incorrecct",
                                         Toast.LENGTH_SHORT).show()
                                 updateUI(null)
                             }
@@ -70,5 +72,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun updateUI(user: FirebaseUser?) {}
+    private fun updateUI(user: FirebaseUser?) {
+        val fm = supportFragmentManager
+        val ft = fm.beginTransaction()
+        val profile: Fragment = AddCategory()
+        ft.add(R.id.cl, profile)
+        ft.addToBackStack("frag1")
+        ft.commit()
+
+    }
 }

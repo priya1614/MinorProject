@@ -54,24 +54,18 @@
 
             android:text="Login"/>
 
+
         <TextView
             android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="No account yet? Create one"
             android:textColor="#FFFFFF"
             android:textSize="16dip" />
-        <TextView
-            android:id="@+id/link_forgotPassword"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:text="forgot password ?"
-            android:textColor="#FFFFFF"
-            android:textSize="16dip" />
+
+
         <Button
 
             android:id="@+id/btn_signup"

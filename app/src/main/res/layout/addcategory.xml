@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    android:id="@+id/cl3"
+    tools:context=".AddCategory"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+        android:hint="Title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ac_title"></EditText>
+
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@+id/ac_title"
+        app:layout_constraintLeft_toLeftOf="@+id/ac_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/abc"
+        android:id="@+id/ac_image" />
+    <Button
+        android:id="@+id/ac_addimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add category image"
+        app:layout_constraintTop_toBottomOf="@+id/ac_image"
+        app:layout_constraintLeft_toLeftOf="@id/ac_image"></Button>
+
+
+    <Button
+        android:text="add category"
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:layout_constraintTop_toBottomOf="@+id/ac_addimage"
+        app:layout_constraintLeft_toLeftOf="@id/ac_addimage"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
