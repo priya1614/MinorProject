@@ -1,6 +1,7 @@
 package com.example.minorproject
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.minorproject.model.AlphaChar
-import com.squareup.picasso.Picasso
+import com.example.minorproject.model.AddCategoryModelClass
 
-class AlphaAdapter(var context: Context, var arrayList: ArrayList<AlphaChar>): RecyclerView.Adapter<AlphaAdapter.ItemHolder >() {
+class AddCategoryAdapter(var context: Context, var arrayList: ArrayList<AddCategoryModelClass>): RecyclerView.Adapter<AddCategoryAdapter.ItemHolder >() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         Log.d("val", "kuch b5")
         val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -27,7 +28,8 @@ class AlphaAdapter(var context: Context, var arrayList: ArrayList<AlphaChar>): R
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
 
-        val alphaChar: AlphaChar = arrayList.get(position)
+        val alphaChar: AddCategoryModelClass = arrayList.get(position)
+        var id=alphaChar.id
         Glide.with(context)
                 .load(alphaChar.iconsChar)
                 .into(holder.icons);
@@ -35,8 +37,16 @@ class AlphaAdapter(var context: Context, var arrayList: ArrayList<AlphaChar>): R
 
 
         holder.alphas.setOnClickListener {
-            Toast.makeText(context, "sucessful", Toast.LENGTH_SHORT).show()
-            Log.d("val", "kuch b")
+            Toast.makeText(context, "sucessful"+id, Toast.LENGTH_SHORT).show()
+
+            var AddCategoryImage:Fragment=AddCategoryImage()
+            var FullScreenImage:Fragment=FullScreenImage()
+            val bundle = Bundle()
+            bundle.putString("id",id)
+            AddCategoryImage.arguments = bundle
+            FullScreenImage.arguments=bundle
+            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.cl,AddCategoryImage).commit()
+
         }
     }
     class ItemHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
