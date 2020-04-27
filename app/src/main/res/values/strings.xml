@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MinorProject</string>
+
+    <string name="title_Category">Category</string>
+    <string name="title_Timeline">Timeline</string>
+    <string name="title_profile">profile</string>
+
 </resources>

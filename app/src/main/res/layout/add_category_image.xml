@@ -13,6 +13,7 @@
         android:orientation="vertical"
         android:layout_marginTop="100dp"
         android:layout_gravity="center"
+
         android:foregroundGravity="center"
         >
 
@@ -38,8 +39,6 @@
             android:text="add category image"
             app:layout_constraintTop_toBottomOf="@+id/ac_image2"
             app:layout_constraintLeft_toLeftOf="@id/ac_image2"></Button>
-
-
         <Button
             android:layout_gravity="center"
             android:layout_marginTop="30dp"

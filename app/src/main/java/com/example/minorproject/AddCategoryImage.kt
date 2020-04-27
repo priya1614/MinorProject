@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,43 +15,47 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import com.google.type.Date
 import java.io.IOException
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import kotlin.time.ExperimentalTime
+import kotlin.time.TimeMark
+
 
 class AddCategoryImage : Fragment() {
     private val PICK_IMAGE_REQUEST = 72
     private var filePath: Uri? = null
     private var imageview: ImageView? = null
-
-
     private var add: Button?=null
     private var addimage: Button?=null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
-    var TAG = "val"
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v=inflater.inflate(R.layout.add_category_image, container, false)
         return v
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addimage = view.findViewById<View>(R.id.ac_addimage2) as Button
         add = view.findViewById<View>(R.id.floatingActionButton2) as Button
-
+        val args = arguments?.getString("id")
         imageview = view.findViewById<View>(R.id.ac_image2) as ImageView
-        addimage!!.setOnClickListener { launchGallery() }
-        val args = arguments!!.getString("id")
-        add!!.setOnClickListener {
-
+        addimage?.setOnClickListener { launchGallery() }
+        add?.setOnClickListener {
+            val args = arguments?.getString("id")
             auth = FirebaseAuth.getInstance()
             mStorageRef = FirebaseStorage.getInstance().getReference();
             if(filePath != null){
                 val ref = mStorageRef?.child("category detail image/" +args )
+
                 val uploadTask = ref?.putFile(filePath!!)
 
                 val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
@@ -62,24 +67,39 @@ class AddCategoryImage : Fragment() {
                     return@Continuation ref.downloadUrl
                 })?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val user: MutableMap<String, Any> = HashMap()
+                        val user: MutableMap<String,Any> = HashMap()
+
                         val downloadUri = task.result
                         var uri=downloadUri.toString()
+                        val date = LocalDateTime.now()
+                        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+                        val formatted = date.format(formatter)
+
+                        user["Date"]=formatted
 
                         user["imageUrl"] = uri
 
-                        val db = FirebaseFirestore.getInstance().collection("category image").document(args!!)
-                        db.collection("category image details").document().set(user)
-                                .addOnSuccessListener { documentReference ->
-                                    // Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                                    var categorydetails: Fragment = CategoryDetail()
-                                    val bundle = Bundle()
-                                    bundle.putString("id",args)
-                                    categorydetails.arguments = bundle
+                        var db = FirebaseFirestore.getInstance()
+                        db.collection("category image").document(args!!).collection("category image details").document().set(user)
+                                .addOnSuccessListener{DocumentReference->
+                                    db.collection("category image").document(args!!).collection("category image details").get()
+                                        .addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                             var document :QueryDocumentSnapshot=task.result!!.first()
+                                                var id = document.id
+                                                db.collection("timeLine image").document(auth.currentUser!!.uid).collection("timeline").document(id).set(user).addOnSuccessListener {
 
-                                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.cl, categorydetails).commit()
+                                                    var categorydetails: Fragment = CategoryDetail()
+                                                    Log.d("id", "${args}")
+                                                    val bundle = Bundle()
+                                                    bundle.putString("id", args)
+                                                    categorydetails.arguments = bundle
+                                                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, categorydetails).addToBackStack("frag6").commit()
 
-                                }
+                                                }
+
+
+
 
                     } else {
                         // Handle failures
@@ -87,9 +107,7 @@ class AddCategoryImage : Fragment() {
                 }?.addOnFailureListener{
 
                 }
-            }else{
-                Toast.makeText(activity, "Please Upload an Image", Toast.LENGTH_SHORT).show()
-            }
+            }}}}
 
         }
     }
@@ -100,6 +118,7 @@ class AddCategoryImage : Fragment() {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
+    @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
@@ -108,12 +127,7 @@ class AddCategoryImage : Fragment() {
             }
 
             filePath = data.data
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, filePath)
-                imageview?.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+
         }
     }
 

@@ -11,22 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="100dp"
         android:layout_gravity="center"
         android:foregroundGravity="center"
+        android:gravity="center"
         >
-
-    <EditText
-        android:layout_marginTop="50dp"
-        android:hint="Enter Title name"
-        android:textColorHint="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ac_title"></EditText>
-
-
     <ImageView
         android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@+id/ac_title"
@@ -35,9 +23,19 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
+        android:background="#FFFFFF"
         android:foregroundGravity="center"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:src="@drawable/ic_photo_library_black_photo"/>
+        <EditText
+            android:layout_marginTop="50dp"
+            android:hint="Enter Category Title name"
+            android:textColorHint="#FFFFFF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ac_title"></EditText>
     <Button
         android:layout_marginTop="30dp"
         android:layout_gravity="center"

@@ -11,7 +11,6 @@ class AddCategoryImageModelClass {
     constructor(iconsChar: String?,id:String?,args:String?) {
         this.iconsChar = iconsChar
         this.args=args
-
         this.id=id
         Log.d("title4","${iconsChar}")
 

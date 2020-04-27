@@ -20,8 +20,9 @@ class MainActivity : AppCompatActivity() {
     var su: Button? = null
     private lateinit var auth: FirebaseAuth
     var TAG = "val"
-    var fm: FragmentManager? = null
-    var fragmentTransaction: FragmentTransaction? = null
+
+    var model=BottomNavigation()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,12 +31,13 @@ class MainActivity : AppCompatActivity() {
         login = findViewById<View>(R.id.btn_login) as Button
         su = findViewById<View>(R.id.btn_signup) as Button
         auth = FirebaseAuth.getInstance()
+
         su!!.setOnClickListener {
 
             val fm = supportFragmentManager
             val ft = fm.beginTransaction()
             val signup: Fragment = SignUp()
-            ft.add(R.id.cl, signup)
+            ft.add(R.id.frame, signup)
             ft.addToBackStack("frag1")
             ft.commit()
         }
@@ -59,7 +61,6 @@ class MainActivity : AppCompatActivity() {
                                 Log.w(TAG, "signInWithEmail:failure", task.exception)
                                 Toast.makeText(this@MainActivity, "email id or password are incorrecct",
                                         Toast.LENGTH_SHORT).show()
-                                updateUI(null)
                             }
                         }
             }
@@ -75,8 +76,8 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
-        val profile: Fragment = AddCategory()
-        ft.add(R.id.cl, profile)
+        val BottomNavigation: Fragment = BottomNavigation()
+        ft.replace(R.id.frame, BottomNavigation)
         ft.addToBackStack("frag1")
         ft.commit()
 

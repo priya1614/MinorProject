@@ -20,13 +20,12 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import java.io.IOException
 
-@Suppress("DEPRECATION")
+
 class AddCategory : Fragment() {
     private val PICK_IMAGE_REQUEST = 72
     private var filePath: Uri? = null
     private var imageview: ImageView? = null
     private var text: EditText? = null
-
     private var add:Button?=null
     private var addimage:Button?=null
     private lateinit var auth: FirebaseAuth
@@ -73,7 +72,7 @@ class AddCategory : Fragment() {
                                     // Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
                                     var category: Fragment = Category()
 
-                                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.cl, category).commit()
+                                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, category).setBreadCrumbTitle("Category").addToBackStack("frag7").commit()
 
                                 }
 
@@ -96,6 +95,7 @@ class AddCategory : Fragment() {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
+    @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
@@ -104,12 +104,7 @@ class AddCategory : Fragment() {
             }
 
             filePath = data.data
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, filePath)
-                imageview?.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+
         }
     }
 

@@ -5,50 +5,51 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.minorproject.model.AddCategoryModelClass
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 
 
-class Category : Fragment() {
+class Category : Fragment(),LifecycleOwner{
     var recyclerView:RecyclerView?=null
     var f:FloatingActionButton?=null
+
     var gridLayoutManager: GridLayoutManager?=null
-    var arrayList:ArrayList<AddCategoryModelClass>?=null
-    var AlphaAdapter:AddCategoryAdapter?=null
     private lateinit var auth: FirebaseAuth
+    var AddCategoryAdapter:AddCategoryAdapter?=null
 
-
+    var ArrayList=MutableLiveData<ArrayList<AddCategoryModelClass>>()
+    var viewModel=CategoryViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v=inflater.inflate(R.layout.categorylayout, container, false)
         recyclerView = v?.findViewById(R.id.rv)
-        gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
-        recyclerView?.layoutManager = gridLayoutManager
         recyclerView?.setHasFixedSize(true)
-        auth = FirebaseAuth.getInstance()
 
-            var item: ArrayList<AddCategoryModelClass> = ArrayList()
-            val db = FirebaseFirestore.getInstance()
-            db.collection("category").document(auth.currentUser!!.uid).collection("category details").get()
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            for (document in task.result!!) {
-                                var id = document.id
+        viewModel=ViewModelProvider(this)[CategoryViewModel::class.java]
+        viewModel.getcategory().observe(this, Observer{arraylist->
+            AddCategoryAdapter=context?.let { AddCategoryAdapter(it, arraylist!!) }
+            gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
+            recyclerView?.layoutManager = gridLayoutManager
+            recyclerView!!.adapter=AddCategoryAdapter
 
-                                var imageUrl = document.data.get("imageUrl").toString()
-                                var title = document.data.get("Title").toString()
-                                item.add(AddCategoryModelClass(imageUrl, title,id))
-                                AlphaAdapter=AddCategoryAdapter(context!!,item!!)
-                                recyclerView?.adapter=AlphaAdapter
-                            }
-                        }
-                    }
+        })
+
         return v
-
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        f=view.findViewById(R.id.fab)
+        f!!.setOnClickListener {
+            var AddCategory:Fragment=AddCategory()
+            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,AddCategory).addToBackStack("frag3").commit()
+        }
     }
 
 }

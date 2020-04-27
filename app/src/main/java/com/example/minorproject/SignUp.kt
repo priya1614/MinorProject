@@ -29,7 +29,6 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-@Suppress("DEPRECATION")
 class SignUp : Fragment() {
     var semail: EditText? = null
     var sname: EditText? = null
@@ -38,7 +37,6 @@ class SignUp : Fragment() {
     private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
     private var choose: Button? = null
-    private var upload: Button? = null
     private var imageview: ImageView? = null
 
     private lateinit var auth: FirebaseAuth
@@ -97,7 +95,7 @@ class SignUp : Fragment() {
                                         })?.addOnCompleteListener { task ->
                                             if (task.isSuccessful) {
 
-                                                val user: MutableMap<String, Any> = HashMap()
+                                                                                              val user: MutableMap<String, Any> = HashMap()
                                                 val downloadUri = task.result
                                                 var uri=downloadUri.toString()
                                                 user["name"] = name
@@ -146,12 +144,7 @@ class SignUp : Fragment() {
             }
 
             filePath = data.data
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, filePath)
-                imageview?.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.minorproject.model
 
 import android.util.Log
+import com.example.minorproject.CategoryViewModel
 
 class AddCategoryModelClass {
     var id:String?=null
@@ -16,4 +17,5 @@ class AddCategoryModelClass {
 
 
     }
+
 }
