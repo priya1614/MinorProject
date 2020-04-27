@@ -23,7 +23,7 @@ import com.example.minorproject.model.AddCategoryModelClass
 class AddCategoryAdapter(var context: Context, var arrayList: ArrayList<AddCategoryModelClass>): RecyclerView.Adapter<AddCategoryAdapter.ItemHolder >() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val inflater= LayoutInflater.from(parent.context)
-      var  binding:ListItemBinding= DataBindingUtil.inflate(inflater, R.layout.list_item, parent, false)
+      val  binding:ListItemBinding= DataBindingUtil.inflate(inflater, R.layout.list_item, parent, false)
         return ItemHolder(binding)
     }
     override fun getItemCount(): Int{
@@ -34,10 +34,10 @@ class AddCategoryAdapter(var context: Context, var arrayList: ArrayList<AddCateg
         holder.binding.executePendingBindings()
 
        val alphaChar: AddCategoryModelClass = arrayList.get(position)
-           var id = alphaChar.id
+           val id = alphaChar.id
            Glide.with(context)
                   .load(alphaChar.iconsChar)
-                   .into(holder.binding.image);
+                   .into(holder.binding.image)
        //     holder.alphas.text = alphaChar.alphaChar
            holder.binding.image.setOnClickListener {
                val bundle = Bundle()

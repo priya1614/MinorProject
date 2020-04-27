@@ -26,7 +26,7 @@ class TimeLineAdapter(var context: Context, var arrayList: ArrayList<TimeLineMod
         //   val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item_2, parent, false)
         // return ItemHolder(itemHolder)
         val inflater= LayoutInflater.from(parent.context)
-        var  binding: ListItem3Binding = DataBindingUtil.inflate(inflater, R.layout.list_item_3, parent, false)
+        val  binding: ListItem3Binding = DataBindingUtil.inflate(inflater, R.layout.list_item_3, parent, false)
         return ItemHolder(binding)
     }
 
@@ -44,7 +44,7 @@ class TimeLineAdapter(var context: Context, var arrayList: ArrayList<TimeLineMod
         holder.binding.date.text =(alphaChar.date!!).toString()
         Glide.with(context)
                 .load(alphaChar.image).apply(RequestOptions.circleCropTransform())
-                .into(holder.binding.image3);
+                .into(holder.binding.image3)
 
         }
 

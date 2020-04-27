@@ -21,13 +21,12 @@ class CategoryDetail:Fragment(){
     var recyclerView: RecyclerView?=null
     var f: FloatingActionButton?=null
     var gridLayoutManager: GridLayoutManager?=null
-    var arrayList:ArrayList<AddCategoryImageModelClass>?=null
     var AddCategoryImageAdapter:AddCategoryImageAdapter?=null
     private lateinit var auth: FirebaseAuth
     var viewModel2=CategoryDetailViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-            var v = inflater.inflate(R.layout.category_detail, container, false)
+            val v = inflater.inflate(R.layout.category_detail, container, false)
             recyclerView = v?.findViewById(R.id.rv2)
             recyclerView?.setHasFixedSize(true)
             auth = FirebaseAuth.getInstance()
@@ -46,11 +45,11 @@ class CategoryDetail:Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var args = arguments?.getString("id")
+        val args = arguments?.getString("id")
         Log.d("val1","${args}")
         f=view.findViewById(R.id.fab2)
         f!!.setOnClickListener {
-            var AddCategoryImage:Fragment=AddCategoryImage()
+            val AddCategoryImage:Fragment=AddCategoryImage()
             val bundle = Bundle()
             bundle.putString("id", args)
             AddCategoryImage.arguments = bundle

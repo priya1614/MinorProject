@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     var login: Button? = null
     var su: Button? = null
     private lateinit var auth: FirebaseAuth
-    var TAG = "val"
 
     var model=BottomNavigation()
 
@@ -52,13 +51,13 @@ class MainActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(Email, password)
                         .addOnCompleteListener(this@MainActivity) { task ->
                             if (task.isSuccessful) { // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInWithEmail:success")
+                              //  Log.d(TAG, "signInWithEmail:success")
                                 Toast.makeText(this@MainActivity, "Authentication success.", Toast.LENGTH_SHORT).show()
 
                                 val user = auth.getCurrentUser()
                                 updateUI(user)
                             } else { // If sign in fails, display a message to the user.
-                                Log.w(TAG, "signInWithEmail:failure", task.exception)
+                              //  Log.w(TAG, "signInWithEmail:failure", task.exception)
                                 Toast.makeText(this@MainActivity, "email id or password are incorrecct",
                                         Toast.LENGTH_SHORT).show()
                             }

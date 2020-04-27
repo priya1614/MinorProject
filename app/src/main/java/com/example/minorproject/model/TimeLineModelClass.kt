@@ -3,19 +3,8 @@ package com.example.minorproject.model
 import android.util.Log
 import java.util.*
 
-class TimeLineModelClass {
-
-    var image:String?=null
-    var date:String?=null
+class TimeLineModelClass//   Log.d("date","${date}")
+(var image: String?, var date: String?) {
 
 
-    constructor(image: String?,date: String?) {
-        this.image = image
-        this.date=date
-        Log.d("date","${date}")
-
-
-
-
-    }
 }

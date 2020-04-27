@@ -22,12 +22,12 @@ class FullScreenImage :Fragment() {
     var image: ImageView? = null
     private lateinit var auth: FirebaseAuth
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var v = inflater.inflate(R.layout.full_screen_image, container, false)
+        val v = inflater.inflate(R.layout.full_screen_image, container, false)
         val args = arguments?.getString("id1")
         val args2 = arguments?.getString("id2")
 
-        Log.d("val", "${args}")
-        Log.d("val", "${args2}")
+      //  Log.d("val", "${args}")
+     //   Log.d("val", "${args2}")
 
         val db = FirebaseFirestore.getInstance().collection("category image").document(args!!)
         val documentReference = db.collection("category image details").document(args2!!)
@@ -53,16 +53,13 @@ class FullScreenImage :Fragment() {
         btn!!.setOnClickListener {
 
             auth = FirebaseAuth.getInstance()
-                val db = FirebaseFirestore.getInstance().collection("category image").document(args!!)
-            val documentReference = db.collection("category image details").document(args2!!).delete().addOnCompleteListener {
+                FirebaseFirestore.getInstance().collection("category image").document(args!!)
+          .collection("category image details").document(args2!!).delete().addOnCompleteListener {
                 Toast.makeText(context, "deleted", Toast.LENGTH_SHORT).show()
-                val db = FirebaseFirestore.getInstance().collection("timeLine image").document(auth.currentUser!!.uid).collection("timeline").document(args2!!).delete().addOnCompleteListener {
-                    Toast.makeText(context, "deleted", Toast.LENGTH_SHORT).show()
-
-
-
+                  FirebaseFirestore.getInstance().collection("timeLine image").document(auth.currentUser!!.uid)
+                        .collection("timeline").document(args2).delete().addOnCompleteListener {
                     (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()
-                    var CategoryDetail: Fragment = CategoryDetail()
+                    val CategoryDetail: Fragment = CategoryDetail()
                     val bundle = Bundle()
                     bundle.putString("id", args)
                     CategoryDetail.arguments = bundle

@@ -36,13 +36,15 @@
             android:id="@+id/ac_addimage2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="add category image"
+            android:text="Select category image"
             app:layout_constraintTop_toBottomOf="@+id/ac_image2"
-            app:layout_constraintLeft_toLeftOf="@id/ac_image2"></Button>
+            app:layout_constraintLeft_toLeftOf="@id/ac_image2">
+            
+        </Button>
         <Button
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:text="add category"
+            android:text="add category image"
             android:id="@+id/floatingActionButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -48,7 +48,7 @@ class Profile : Fragment()
             val email: String? = documentSnapshot?.getString("email")
             val name: String? = documentSnapshot?.getString("name")
             val imagurl: String? = documentSnapshot?.getString("imageUrl")
-            Log.d("vaal","${imagurl}")
+           // Log.d("vaal","${imagurl}")
 
             pemail = view?.findViewById<View>(R.id.profile_email) as TextView
             pemail.setText(email).toString()
@@ -66,19 +66,19 @@ class Profile : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
-        pbtn = view?.findViewById<View>(R.id.btn_logout) as Button
+        mStorageRef = FirebaseStorage.getInstance().getReference()
+        pbtn = view.findViewById<View>(R.id.btn_logout) as Button
         auth = FirebaseAuth.getInstance()
         pbtn!!.setOnClickListener {
             auth.signOut()
-            var BottomNavigation:Fragment=BottomNavigation()
-            var MainActivity:Activity=MainActivity()
+            val BottomNavigation:Fragment=BottomNavigation()
+            val MainActivity:Activity=MainActivity()
             (context as MainActivity).supportFragmentManager.beginTransaction().remove(BottomNavigation).commit()
             val intent = Intent(this.context, MainActivity::class.java)
             startActivity(intent)
         }
-        pbtn2 = view?.findViewById<View>(R.id.btn_changeprofile) as Button
-        imageview = view?.findViewById<ImageView>(R.id.iv2) as ImageView
+        pbtn2 = view.findViewById(R.id.btn_changeprofile) as Button
+        imageview = view.findViewById<ImageView>(R.id.iv2) as ImageView
         imageview!!.setOnClickListener {
             launchGallery()
 
@@ -89,39 +89,31 @@ class Profile : Fragment()
         fun addphoto()
         {
             auth = FirebaseAuth.getInstance()
-            Log.d("val","Kuchb")
-            Log.d("val","${filePath}")
+           // Log.d("val","Kuchb")
+          //  Log.d("val","${filePath}")
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+        mStorageRef = FirebaseStorage.getInstance().getReference()
         if(filePath != null) {
 
-            val ref = mStorageRef?.child("uploads/" + auth.currentUser!!.uid)
-            val uploadTask = ref?.putFile(filePath!!)
-            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
-                    }
-                }
-                return@Continuation ref.downloadUrl
-            })?.addOnCompleteListener { task ->
+            val ref = mStorageRef.child("uploads/" + auth.currentUser!!.uid)
+            ref.putFile(filePath!!)
+          .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val db = FirebaseFirestore.getInstance()
                     val documentReference = db.collection("user").document(auth.currentUser!!.uid)
                     documentReference.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-
                         val email: String? = documentSnapshot?.getString("email")
                         val name: String? = documentSnapshot?.getString("name")
                         val password:String?=documentSnapshot?.getString("password")
 
                     val user: MutableMap<String, Any> = HashMap()
                     val downloadUri = task.result
-                    var uri=downloadUri.toString()
+                    val uri=downloadUri.toString()
                     user["name"] = name.toString()
                     user["email"] = email.toString()
                     user["password"] = password.toString()
                     user["imageUrl"] = uri
-                    val db = FirebaseFirestore.getInstance()
+
                     db.collection("user").document(auth.currentUser!!.uid).set(user as Map<String, Any>)
 
                             .addOnSuccessListener { documentReference ->

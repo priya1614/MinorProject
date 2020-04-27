@@ -41,7 +41,7 @@ class SignUp : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
-    var TAG = "val"
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,12 +60,12 @@ class SignUp : Fragment() {
         choose!!.setOnClickListener { launchGallery() }
 
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+        mStorageRef = FirebaseStorage.getInstance().getReference()
 
 
         su2!!.setOnClickListener {
             auth = FirebaseAuth.getInstance()
-            mStorageRef = FirebaseStorage.getInstance().getReference();
+            mStorageRef = FirebaseStorage.getInstance().getReference()
             val Email2 = semail!!.text.toString()
             val password2 = spass!!.text.toString()
             val name = sname!!.text.toString()
@@ -80,24 +80,23 @@ class SignUp : Fragment() {
                 auth.createUserWithEmailAndPassword(Email2, password2)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) { // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success")
+                              //  Log.d(TAG, "createUserWithEmail:success")
                                     if(filePath != null){
-                                        val ref = mStorageRef?.child("uploads/" +auth.currentUser!!.uid )
-                                        val uploadTask = ref?.putFile(filePath!!)
+                                        val ref = mStorageRef.child("uploads/" +auth.currentUser!!.uid )
+                                        val uploadTask = ref.putFile(filePath!!)
 
-                                        val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                                         uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                                             if (!task.isSuccessful) {
                                                 task.exception?.let {
                                                     throw it
                                                 }
                                             }
                                             return@Continuation ref.downloadUrl
-                                        })?.addOnCompleteListener { task ->
+                                        }).addOnCompleteListener { task ->
                                             if (task.isSuccessful) {
-
-                                                                                              val user: MutableMap<String, Any> = HashMap()
+                                                val user: MutableMap<String, Any> = HashMap()
                                                 val downloadUri = task.result
-                                                var uri=downloadUri.toString()
+                                                val uri=downloadUri.toString()
                                                 user["name"] = name
                                                 user["email"] = Email2
                                                 user["password"] = password2
@@ -110,18 +109,14 @@ class SignUp : Fragment() {
                                                         }
                                                 (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()
 
-                                            } else {
-                                                // Handle failures
                                             }
-                                        }?.addOnFailureListener{
-
                                         }
                                     }else{
                                         Toast.makeText(activity, "Please Upload an Image", Toast.LENGTH_SHORT).show()
                                     }
 
                             } else { // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                               // Log.w(TAG, "createUserWithEmail:failure", task.exception)
                                 Toast.makeText(activity, "user name already exits or enter valid email and password", Toast.LENGTH_SHORT).show()
                             }
 

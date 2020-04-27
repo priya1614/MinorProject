@@ -21,19 +21,19 @@ class CategoryViewModel :ViewModel(),LifecycleObserver
 
     internal fun getcategory(): MutableLiveData<ArrayList<AddCategoryModelClass>>{
         auth = FirebaseAuth.getInstance()
-        var arrayList:ArrayList<AddCategoryModelClass> = ArrayList()
+        val arrayList:ArrayList<AddCategoryModelClass> = ArrayList()
 
         val db = FirebaseFirestore.getInstance()
         db.collection("category").document(auth.currentUser!!.uid).collection("category details").get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         for (document in task.result!!) {
-                            var id = document.id
-                            var imageUrl = document.data.get("imageUrl").toString()
-                            var title = document.data.get("Title").toString()
-                            Log.d("vall", "${imageUrl}")
+                            val id = document.id
+                            val imageUrl = document.data.get("imageUrl").toString()
+                            val title = document.data.get("Title").toString()
+                         //   Log.d("vall", "${imageUrl}")
                            arrayList.add(AddCategoryModelClass(imageUrl,title,id))
-                            Log.d("cat","${arrayList}")
+                          //  Log.d("cat","${arrayList}")
                             category.postValue(arrayList)
                         }
                     }

@@ -21,10 +21,11 @@ class Timeline: Fragment(), LifecycleOwner {
     var f: FloatingActionButton? = null
     var TimeLineAdapter: TimeLineAdapter? = null
 
+
     var ArrayList = MutableLiveData<ArrayList<AddCategoryModelClass>>()
     var viewModel = TimeLineViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var v = inflater.inflate(R.layout.timeline, container, false)
+        val v = inflater.inflate(R.layout.timeline, container, false)
         recyclerView = v?.findViewById(R.id.rv3)
         recyclerView?.setHasFixedSize(true)
         viewModel = ViewModelProvider(this)[TimeLineViewModel::class.java]

@@ -4,12 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
@@ -18,7 +19,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import java.io.IOException
 
 
 class AddCategory : Fragment() {
@@ -30,9 +30,8 @@ class AddCategory : Fragment() {
     private var addimage:Button?=null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
-    var TAG = "val"
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var v=inflater.inflate(R.layout.addcategory, container, false)
+        val v=inflater.inflate(R.layout.addcategory, container, false)
         return v
     }
 
@@ -46,23 +45,23 @@ class AddCategory : Fragment() {
         add!!.setOnClickListener {
             val title = text!!.text.toString()
             auth = FirebaseAuth.getInstance()
-            mStorageRef = FirebaseStorage.getInstance().getReference();
+            mStorageRef = FirebaseStorage.getInstance().getReference()
             if(filePath != null){
-                val ref = mStorageRef?.child("category image/" +auth.currentUser!!.uid )
-                val uploadTask = ref?.putFile(filePath!!)
+                val ref = mStorageRef.child("category image/" +auth.currentUser!!.uid )
+                val uploadTask = ref.putFile(filePath!!)
 
-                val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                     if (!task.isSuccessful) {
                         task.exception?.let {
                             throw it
                         }
                     }
                     return@Continuation ref.downloadUrl
-                })?.addOnCompleteListener { task ->
+                }).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val user: MutableMap<String, Any> = HashMap()
                         val downloadUri = task.result
-                        var uri=downloadUri.toString()
+                        val uri = downloadUri.toString()
                         user["Title"] = title
                         user["imageUrl"] = uri
 
@@ -70,18 +69,13 @@ class AddCategory : Fragment() {
                         db.collection("category details").document().set(user)
                                 .addOnSuccessListener { documentReference ->
                                     // Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                                    var category: Fragment = Category()
+                                    val category: Fragment = Category()
 
                                     (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, category).setBreadCrumbTitle("Category").addToBackStack("frag7").commit()
 
                                 }
 
-                    } else {
-                        // Handle failures
-                    }
-                }?.addOnFailureListener{
-
-                }
+                    }}
             }else{
                 Toast.makeText(activity, "Please Upload an Image", Toast.LENGTH_SHORT).show()
             }
@@ -94,8 +88,6 @@ class AddCategory : Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
-
-    @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {

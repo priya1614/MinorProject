@@ -22,13 +22,11 @@ class Category : Fragment(),LifecycleOwner{
     var f:FloatingActionButton?=null
 
     var gridLayoutManager: GridLayoutManager?=null
-    private lateinit var auth: FirebaseAuth
-    var AddCategoryAdapter:AddCategoryAdapter?=null
 
-    var ArrayList=MutableLiveData<ArrayList<AddCategoryModelClass>>()
+    var AddCategoryAdapter:AddCategoryAdapter?=null
     var viewModel=CategoryViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var v=inflater.inflate(R.layout.categorylayout, container, false)
+        val v=inflater.inflate(R.layout.categorylayout, container, false)
         recyclerView = v?.findViewById(R.id.rv)
         recyclerView?.setHasFixedSize(true)
 
@@ -47,7 +45,7 @@ class Category : Fragment(),LifecycleOwner{
         super.onViewCreated(view, savedInstanceState)
         f=view.findViewById(R.id.fab)
         f!!.setOnClickListener {
-            var AddCategory:Fragment=AddCategory()
+            val AddCategory:Fragment=AddCategory()
             (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,AddCategory).addToBackStack("frag3").commit()
         }
     }

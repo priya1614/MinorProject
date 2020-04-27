@@ -39,7 +39,7 @@ class AddCategoryImage : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var v=inflater.inflate(R.layout.add_category_image, container, false)
+        val v=inflater.inflate(R.layout.add_category_image, container, false)
         return v
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,27 +50,26 @@ class AddCategoryImage : Fragment() {
         imageview = view.findViewById<View>(R.id.ac_image2) as ImageView
         addimage?.setOnClickListener { launchGallery() }
         add?.setOnClickListener {
-            val args = arguments?.getString("id")
             auth = FirebaseAuth.getInstance()
-            mStorageRef = FirebaseStorage.getInstance().getReference();
+            mStorageRef = FirebaseStorage.getInstance().getReference()
             if(filePath != null){
-                val ref = mStorageRef?.child("category detail image/" +args )
+                val ref = mStorageRef.child("category detail image/" +args )
 
-                val uploadTask = ref?.putFile(filePath!!)
+                val uploadTask = ref.putFile(filePath!!)
 
-                val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                     if (!task.isSuccessful) {
                         task.exception?.let {
                             throw it
                         }
                     }
                     return@Continuation ref.downloadUrl
-                })?.addOnCompleteListener { task ->
+                }).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val user: MutableMap<String,Any> = HashMap()
 
                         val downloadUri = task.result
-                        var uri=downloadUri.toString()
+                        val uri=downloadUri.toString()
                         val date = LocalDateTime.now()
                         val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
                         val formatted = date.format(formatter)
@@ -79,17 +78,14 @@ class AddCategoryImage : Fragment() {
 
                         user["imageUrl"] = uri
 
-                        var db = FirebaseFirestore.getInstance()
-                        db.collection("category image").document(args!!).collection("category image details").document().set(user)
+                        val db = FirebaseFirestore.getInstance()
+                        db.collection("category image").document(args!!).collection("category image details").add(user)
                                 .addOnSuccessListener{DocumentReference->
-                                    db.collection("category image").document(args!!).collection("category image details").get()
-                                        .addOnCompleteListener { task ->
-                                        if (task.isSuccessful) {
-                                             var document :QueryDocumentSnapshot=task.result!!.first()
-                                                var id = document.id
-                                                db.collection("timeLine image").document(auth.currentUser!!.uid).collection("timeline").document(id).set(user).addOnSuccessListener {
+                                    val id=DocumentReference.id
 
-                                                    var categorydetails: Fragment = CategoryDetail()
+                                                db.collection("timeLine image").document(auth.currentUser!!.uid).collection("timeline").document(id).set(user, SetOptions.merge()).addOnSuccessListener {
+
+                                                    val categorydetails: Fragment = CategoryDetail()
                                                     Log.d("id", "${args}")
                                                     val bundle = Bundle()
                                                     bundle.putString("id", args)
@@ -101,12 +97,8 @@ class AddCategoryImage : Fragment() {
 
 
 
-                    } else {
-                        // Handle failures
-                    }
-                }?.addOnFailureListener{
 
-                }
+
             }}}}
 
         }
@@ -118,7 +110,6 @@ class AddCategoryImage : Fragment() {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
-    @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {

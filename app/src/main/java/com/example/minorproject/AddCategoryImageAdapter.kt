@@ -24,12 +24,12 @@ class AddCategoryImageAdapter(var context: Context, var arrayList: ArrayList<Add
      //   val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item_2, parent, false)
        // return ItemHolder(itemHolder)
         val inflater= LayoutInflater.from(parent.context)
-        var  binding:ListItem2Binding = DataBindingUtil.inflate(inflater, R.layout.list_item_2, parent, false)
+        val  binding:ListItem2Binding = DataBindingUtil.inflate(inflater, R.layout.list_item_2, parent, false)
         return ItemHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        Log.d("arraysize","${arrayList.size}")
+      //  Log.d("arraysize","${arrayList.size}")
         return arrayList.size
     }
     override fun onBindViewHolder(holder:ItemHolder, position: Int) {
@@ -41,13 +41,13 @@ class AddCategoryImageAdapter(var context: Context, var arrayList: ArrayList<Add
 
             Glide.with(context)
                     .load(alphaChar.iconsChar)
-                    .into(holder.binding.image2);
+                    .into(holder.binding.image2)
 
-        var id2 = alphaChar.id
-        var id1 = alphaChar.args
+        val id2 = alphaChar.id
+        val id1 = alphaChar.args
             holder.binding.image2.setOnClickListener {
                 Toast.makeText(context, "sucessful" + id2, Toast.LENGTH_SHORT).show()
-                var FullScreenImage: Fragment = FullScreenImage()
+                val FullScreenImage: Fragment = FullScreenImage()
                 val bundle = Bundle()
                 bundle.putString("id2", id2)
                 bundle.putString("id1", id1)
