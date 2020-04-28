@@ -29,13 +29,15 @@
         android:src="@drawable/ic_photo_library_black_photo"/>
         <EditText
             android:layout_marginTop="50dp"
-            android:hint="Enter Category Title name"
+            android:hint="@string/enter_category_title_name"
             android:textColorHint="#FFFFFF"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ac_title"></EditText>
+            android:id="@+id/ac_title">
+
+        </EditText>
     <Button
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
@@ -43,15 +45,17 @@
         android:id="@+id/ac_addimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add category image"
+        android:text="@string/select_category_image"
         app:layout_constraintTop_toBottomOf="@+id/ac_image"
-        app:layout_constraintLeft_toLeftOf="@id/ac_image"></Button>
+        app:layout_constraintLeft_toLeftOf="@id/ac_image">
+
+    </Button>
 
 
     <Button
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="add category"
+        android:text="@string/add_category"
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

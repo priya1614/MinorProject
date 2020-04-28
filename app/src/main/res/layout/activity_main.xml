@@ -5,14 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:id="@+id/cl"
     android:background="@drawable/login">
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/frame"
-        android:foregroundGravity="center"
 
-      >
     <LinearLayout
         android:id="@+id/ll"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +26,7 @@
             android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColor="#FFFFFF"
             android:inputType="textEmailAddress"
             android:textColorHint="@android:color/white" />
@@ -43,7 +38,7 @@
             android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
 
             android:textColor="#FFFFFF"
             android:inputType="textPassword"
@@ -58,7 +53,7 @@
             android:layout_marginBottom="24dp"
             android:padding="12dp"
 
-            android:text="Login"/>
+            android:text="@string/login"/>
 
 
         <TextView
@@ -67,9 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="No account yet? Create one"
+            android:text="@string/no_account_yet_create_one"
             android:textColor="#FFFFFF"
-            android:textSize="16dip" />
+            android:textSize="16sp" />
 
 
         <Button
@@ -80,11 +75,10 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="45dp"
             android:padding="12dp"
-            android:text="Signup"/>
+            android:text="@string/signup"/>
 
 
     </LinearLayout>
-    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

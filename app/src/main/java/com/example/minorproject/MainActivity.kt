@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             val fm = supportFragmentManager
             val ft = fm.beginTransaction()
             val signup: Fragment = SignUp()
-            ft.add(R.id.frame, signup)
+            ft.add(R.id.cl, signup)
             ft.addToBackStack("frag1")
             ft.commit()
         }
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
         val BottomNavigation: Fragment = BottomNavigation()
-        ft.replace(R.id.frame, BottomNavigation)
+        ft.replace(R.id.cl, BottomNavigation)
         ft.addToBackStack("frag1")
         ft.commit()
 

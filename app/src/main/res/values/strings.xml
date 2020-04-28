@@ -4,5 +4,16 @@
     <string name="title_Category">Category</string>
     <string name="title_Timeline">Timeline</string>
     <string name="title_profile">profile</string>
+    <string name="signup">signup</string>
+    <string name="name">name</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="enter_category_title_name">Enter Category Title name</string>
+    <string name="select_category_image">select category image</string>
+    <string name="add_category">add category</string>
+    <string name="no_account_yet_create_one">No account yet? Create one</string>
+    <string name="choose_profile_picture">choose profile picture</string>
+
 
 </resources>
