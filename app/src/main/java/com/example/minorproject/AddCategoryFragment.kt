@@ -19,9 +19,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.addcategory.*
 
 
-class AddCategory : Fragment() {
+class AddCategoryFragment : Fragment() {
     private val PICK_IMAGE_REQUEST = 72
     private var filePath: Uri? = null
     private var imageview: ImageView? = null
@@ -38,11 +39,11 @@ class AddCategory : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addimage = view.findViewById<View>(R.id.ac_addimage) as Button
-        add = view.findViewById<View>(R.id.floatingActionButton) as Button
+
        text = view.findViewById<View>(R.id.ac_title) as EditText
         imageview = view.findViewById<View>(R.id.ac_image) as ImageView
         addimage!!.setOnClickListener { launchGallery() }
-        add!!.setOnClickListener {
+        add_category_button.setOnClickListener {
             val title = text!!.text.toString()
             auth = FirebaseAuth.getInstance()
             mStorageRef = FirebaseStorage.getInstance().getReference()
@@ -69,7 +70,7 @@ class AddCategory : Fragment() {
                         db.collection("category details").document().set(user)
                                 .addOnSuccessListener { documentReference ->
                                     // Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                                    val category: Fragment = Category()
+                                    val category: Fragment = CategoryFragment()
 
                                     (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, category).setBreadCrumbTitle("Category").addToBackStack("frag7").commit()
 

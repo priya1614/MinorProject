@@ -2,29 +2,25 @@ package com.example.minorproject
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.minorproject.databinding.ListItem2Binding
-import com.example.minorproject.databinding.ListItemBinding
-import com.example.minorproject.model.AddCategoryImageModelClass
-import com.example.minorproject.model.AddCategoryModelClass
 
-class AddCategoryImageAdapter(var context: Context, var arrayList: ArrayList<AddCategoryImageModelClass>): RecyclerView.Adapter<AddCategoryImageAdapter.ItemHolder >() {
+import com.example.minorproject.databinding.ListItemCategorydetailBinding
+import com.example.minorproject.model.AddCategoryImageModelClass
+
+class CategoryDetailAdapter(var context: Context, var arrayList: ArrayList<AddCategoryImageModelClass>): RecyclerView.Adapter<CategoryDetailAdapter.ItemHolder >() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ItemHolder {
 
-     //   val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item_2, parent, false)
+     //   val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item_categorydetail, parent, false)
        // return ItemHolder(itemHolder)
         val inflater= LayoutInflater.from(parent.context)
-        val  binding:ListItem2Binding = DataBindingUtil.inflate(inflater, R.layout.list_item_2, parent, false)
+        val  binding:ListItemCategorydetailBinding = DataBindingUtil.inflate(inflater, R.layout.list_item_categorydetail, parent, false)
         return ItemHolder(binding)
     }
 
@@ -47,7 +43,7 @@ class AddCategoryImageAdapter(var context: Context, var arrayList: ArrayList<Add
         val id1 = alphaChar.args
             holder.binding.image2.setOnClickListener {
                 Toast.makeText(context, "sucessful" + id2, Toast.LENGTH_SHORT).show()
-                val FullScreenImage: Fragment = FullScreenImage()
+                val FullScreenImage: Fragment = FullScreenImageFragment()
                 val bundle = Bundle()
                 bundle.putString("id2", id2)
                 bundle.putString("id1", id1)
@@ -59,7 +55,7 @@ class AddCategoryImageAdapter(var context: Context, var arrayList: ArrayList<Add
 
    // class ItemHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
      //   var icons: ImageView = ItemView.findViewById<ImageView>(R.id.image2)
-   class ItemHolder(var binding: ListItem2Binding) : RecyclerView.ViewHolder(binding.root) {
+   class ItemHolder(var binding: ListItemCategorydetailBinding) : RecyclerView.ViewHolder(binding.root) {
        // var icons:ImageView= ItemView.findViewById<ImageView>(R.id.image)
        // var alphas:TextView = ItemView.findViewById<TextView>(R.id.text)
    }

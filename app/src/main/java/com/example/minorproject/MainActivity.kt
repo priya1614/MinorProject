@@ -1,46 +1,39 @@
 package com.example.minorproject
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var email: EditText? = null
     var pass: EditText? = null
-    var login: Button? = null
-    var su: Button? = null
     private lateinit var auth: FirebaseAuth
 
-    var model=BottomNavigation()
+    var model=BottomNavigationFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         email = findViewById<View>(R.id.input_email) as EditText
         pass = findViewById<View>(R.id.input_password) as EditText
-        login = findViewById<View>(R.id.btn_login) as Button
-        su = findViewById<View>(R.id.btn_signup) as Button
         auth = FirebaseAuth.getInstance()
 
-        su!!.setOnClickListener {
+        btn_signup.setOnClickListener {
 
             val fm = supportFragmentManager
             val ft = fm.beginTransaction()
-            val signup: Fragment = SignUp()
+            val signup: Fragment = SignUpFragment()
             ft.add(R.id.cl, signup)
             ft.addToBackStack("frag1")
             ft.commit()
         }
-        login!!.setOnClickListener {
+        btn_login.setOnClickListener {
             val Email = email!!.text.toString()
             val password = pass!!.text.toString()
             if (Email.isEmpty()) {
@@ -75,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
-        val BottomNavigation: Fragment = BottomNavigation()
+        val BottomNavigation: Fragment = BottomNavigationFragment()
         ft.replace(R.id.cl, BottomNavigation)
         ft.addToBackStack("frag1")
         ft.commit()

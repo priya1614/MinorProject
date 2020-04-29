@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,18 +13,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.tasks.Continuation
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
-import java.io.IOException
+import kotlinx.android.synthetic.main.profile.*
 
 
-
-class Profile : Fragment()
+class ProfileFragment : Fragment()
 {
     private lateinit var pname:TextView
     private lateinit var pemail:TextView
@@ -67,24 +61,21 @@ class Profile : Fragment()
         super.onViewCreated(view, savedInstanceState)
 
         mStorageRef = FirebaseStorage.getInstance().getReference()
-        pbtn = view.findViewById<View>(R.id.btn_logout) as Button
         auth = FirebaseAuth.getInstance()
-        pbtn!!.setOnClickListener {
+        btn_logout.setOnClickListener {
             auth.signOut()
-            val BottomNavigation:Fragment=BottomNavigation()
+            val BottomNavigation:Fragment=BottomNavigationFragment()
             val MainActivity:Activity=MainActivity()
             (context as MainActivity).supportFragmentManager.beginTransaction().remove(BottomNavigation).commit()
             val intent = Intent(this.context, MainActivity::class.java)
             startActivity(intent)
         }
-        pbtn2 = view.findViewById(R.id.btn_changeprofile) as Button
-        imageview = view.findViewById<ImageView>(R.id.iv2) as ImageView
-        imageview!!.setOnClickListener {
+        iv2.setOnClickListener {
             launchGallery()
 
 
         }
-        pbtn2!!.setOnClickListener { addphoto() }
+        btn_changeprofile.setOnClickListener { addphoto() }
     }
         fun addphoto()
         {

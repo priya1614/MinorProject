@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.google.type.Date
+import kotlinx.android.synthetic.main.add_category_image.*
 import java.io.IOException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -30,7 +31,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.TimeMark
 
 
-class AddCategoryImage : Fragment() {
+class AddImageToCategoryFragment : Fragment() {
     private val PICK_IMAGE_REQUEST = 72
     private var filePath: Uri? = null
     private var imageview: ImageView? = null
@@ -38,18 +39,20 @@ class AddCategoryImage : Fragment() {
     private var addimage: Button?=null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
+  var args:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v=inflater.inflate(R.layout.add_category_image, container, false)
+
         return v
+
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addimage = view.findViewById<View>(R.id.ac_addimage2) as Button
-        add = view.findViewById<View>(R.id.floatingActionButton2) as Button
-        val args = arguments?.getString("id")
+        args = arguments?.getString("id")
         imageview = view.findViewById<View>(R.id.ac_image2) as ImageView
         addimage?.setOnClickListener { launchGallery() }
-        add?.setOnClickListener {
+        add_category_image_button.setOnClickListener {
             auth = FirebaseAuth.getInstance()
             mStorageRef = FirebaseStorage.getInstance().getReference()
             if(filePath != null){

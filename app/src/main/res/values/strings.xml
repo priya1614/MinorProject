@@ -14,6 +14,7 @@
     <string name="add_category">add category</string>
     <string name="no_account_yet_create_one">No account yet? Create one</string>
     <string name="choose_profile_picture">choose profile picture</string>
+    <string name="delete_image">Delete image</string>
 
 
 </resources>

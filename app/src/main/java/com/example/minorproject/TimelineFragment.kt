@@ -16,13 +16,10 @@ import com.example.minorproject.model.AddCategoryModelClass
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 
-class Timeline: Fragment(), LifecycleOwner {
+class TimelineFragment: Fragment(), LifecycleOwner {
     var recyclerView: RecyclerView? = null
     var f: FloatingActionButton? = null
     var TimeLineAdapter: TimeLineAdapter? = null
-
-
-    var ArrayList = MutableLiveData<ArrayList<AddCategoryModelClass>>()
     var viewModel = TimeLineViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.timeline, container, false)

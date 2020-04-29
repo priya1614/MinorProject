@@ -1,13 +1,14 @@
 package com.example.minorproject
 
-import android.util.Log
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.minorproject.model.AddCategoryModelClass
 import com.example.minorproject.model.TimeLineModelClass
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TimeLineViewModel : ViewModel(),LifecycleObserver
 {
@@ -17,9 +18,8 @@ class TimeLineViewModel : ViewModel(),LifecycleObserver
     internal fun getTimeline(): MutableLiveData<ArrayList<TimeLineModelClass>> {
         auth = FirebaseAuth.getInstance()
         val arrayList:ArrayList<TimeLineModelClass> = ArrayList()
-
         val db = FirebaseFirestore.getInstance()
-        db.collection("timeLine image").document(auth.currentUser!!.uid).collection("timeline").get()
+        db.collection("timeLine image").document(auth.currentUser!!.uid).collection("timeline").orderBy("Date",Query.Direction.DESCENDING).get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         for (document in task.result!!) {

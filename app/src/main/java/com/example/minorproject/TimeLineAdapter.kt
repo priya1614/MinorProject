@@ -1,32 +1,27 @@
 package com.example.minorproject
 
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.minorproject.databinding.ListItem2Binding
-import com.example.minorproject.databinding.ListItem3Binding
-import com.example.minorproject.model.AddCategoryImageModelClass
+
+
+import com.example.minorproject.databinding.ListItemTimelineBinding
 import com.example.minorproject.model.TimeLineModelClass
-import java.util.*
-import kotlin.Unit.toString
 import kotlin.collections.ArrayList
 
 class TimeLineAdapter(var context: Context, var arrayList: ArrayList<TimeLineModelClass>): RecyclerView.Adapter<TimeLineAdapter.ItemHolder >() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ItemHolder {
 
-        //   val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item_2, parent, false)
+        //   val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item_categorydetail, parent, false)
         // return ItemHolder(itemHolder)
         val inflater= LayoutInflater.from(parent.context)
-        val  binding: ListItem3Binding = DataBindingUtil.inflate(inflater, R.layout.list_item_3, parent, false)
+        val  binding: ListItemTimelineBinding= DataBindingUtil.inflate(inflater, R.layout.list_item_timeline, parent, false)
         return ItemHolder(binding)
     }
 
@@ -48,10 +43,9 @@ class TimeLineAdapter(var context: Context, var arrayList: ArrayList<TimeLineMod
 
         }
 
-
     // class ItemHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
     //   var icons: ImageView = ItemView.findViewById<ImageView>(R.id.image2)
-    class ItemHolder(var binding: ListItem3Binding) : RecyclerView.ViewHolder(binding.root) {
+    class ItemHolder(var binding: ListItemTimelineBinding) : RecyclerView.ViewHolder(binding.root) {
         // var icons:ImageView= ItemView.findViewById<ImageView>(R.id.image)
         // var alphas:TextView = ItemView.findViewById<TextView>(R.id.text)
     }

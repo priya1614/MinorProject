@@ -24,16 +24,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.signup.*
 import java.io.IOException
 import java.util.*
 import kotlin.collections.HashMap
 
 
-class SignUp : Fragment() {
+class SignUpFragment : Fragment() {
     var semail: EditText? = null
     var sname: EditText? = null
     var spass: EditText? = null
-    var su2: Button? = null
     private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
     private var choose: Button? = null
@@ -53,17 +53,17 @@ class SignUp : Fragment() {
         semail = view.findViewById<View>(R.id.signup_email) as EditText
         sname = view.findViewById<View>(R.id.signup_name) as EditText
         spass = view.findViewById<View>(R.id.signup_password) as EditText
-        su2 = view.findViewById<View>(R.id.btn_signup2) as Button
-        choose = view.findViewById<View>(R.id.btn) as Button
+
+
 
         imageview = view.findViewById<View>(R.id.iv) as ImageView
-        choose!!.setOnClickListener { launchGallery() }
+        btn.setOnClickListener { launchGallery() }
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference()
 
 
-        su2!!.setOnClickListener {
+        btn_signup2!!.setOnClickListener {
             auth = FirebaseAuth.getInstance()
             mStorageRef = FirebaseStorage.getInstance().getReference()
             val Email2 = semail!!.text.toString()

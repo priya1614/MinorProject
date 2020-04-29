@@ -6,36 +6,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.minorproject.model.AddCategoryModelClass
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.categorylayout.*
 
 
-class Category : Fragment(),LifecycleOwner{
-    var recyclerView:RecyclerView?=null
-    var f:FloatingActionButton?=null
+class CategoryFragment : Fragment(),LifecycleOwner{
+
+
 
     var gridLayoutManager: GridLayoutManager?=null
 
-    var AddCategoryAdapter:AddCategoryAdapter?=null
+    var AddCategoryAdapter:CategoryAdapter?=null
     var viewModel=CategoryViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v=inflater.inflate(R.layout.categorylayout, container, false)
-        recyclerView = v?.findViewById(R.id.rv)
-        recyclerView?.setHasFixedSize(true)
+
+        recyclerview?.setHasFixedSize(true)
 
         viewModel=ViewModelProvider(this)[CategoryViewModel::class.java]
         viewModel.getcategory().observe(this, Observer{arraylist->
-            AddCategoryAdapter=context?.let { AddCategoryAdapter(it, arraylist!!) }
+            AddCategoryAdapter=context?.let { CategoryAdapter(it, arraylist!!) }
             gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
-            recyclerView?.layoutManager = gridLayoutManager
-            recyclerView!!.adapter=AddCategoryAdapter
+            recyclerview?.layoutManager = gridLayoutManager
+            recyclerview?.adapter=AddCategoryAdapter
 
         })
 
@@ -43,9 +39,8 @@ class Category : Fragment(),LifecycleOwner{
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        f=view.findViewById(R.id.fab)
-        f!!.setOnClickListener {
-            val AddCategory:Fragment=AddCategory()
+        fab!!.setOnClickListener {
+            val AddCategory:Fragment=AddCategoryFragment()
             (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,AddCategory).addToBackStack("frag3").commit()
         }
     }

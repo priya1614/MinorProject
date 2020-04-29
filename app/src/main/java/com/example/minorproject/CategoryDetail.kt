@@ -1,7 +1,6 @@
 package com.example.minorproject
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,33 +9,27 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.minorproject.model.AddCategoryImageModelClass
-import com.example.minorproject.model.AddCategoryModelClass
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.category_detail.*
 
 class CategoryDetail:Fragment(){
-    var recyclerView: RecyclerView?=null
-    var f: FloatingActionButton?=null
     var gridLayoutManager: GridLayoutManager?=null
-    var AddCategoryImageAdapter:AddCategoryImageAdapter?=null
+    var AddCategoryImageAdapter:CategoryDetailAdapter?=null
     private lateinit var auth: FirebaseAuth
     var viewModel2=CategoryDetailViewModel()
+    var args:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
             val v = inflater.inflate(R.layout.category_detail, container, false)
-            recyclerView = v?.findViewById(R.id.rv2)
-            recyclerView?.setHasFixedSize(true)
+            recyclerview_2?.setHasFixedSize(true)
             auth = FirebaseAuth.getInstance()
-            val args = arguments?.getString("id")
+             args = arguments?.getString("id")
             viewModel2 = ViewModelProvider(this)[CategoryDetailViewModel::class.java]
             viewModel2.getcategory(args!!).observe(this, Observer { arraylist ->
-                AddCategoryImageAdapter = context?.let { AddCategoryImageAdapter(it, arraylist!!) }
+                AddCategoryImageAdapter = context?.let { CategoryDetailAdapter(it, arraylist!!) }
                 gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
-                recyclerView?.layoutManager = gridLayoutManager
-                recyclerView!!.adapter = AddCategoryImageAdapter
+                recyclerview_2?.layoutManager = gridLayoutManager
+                recyclerview_2!!.adapter = AddCategoryImageAdapter
 
             })
 
@@ -45,11 +38,10 @@ class CategoryDetail:Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val args = arguments?.getString("id")
-        Log.d("val1","${args}")
-        f=view.findViewById(R.id.fab2)
-        f!!.setOnClickListener {
-            val AddCategoryImage:Fragment=AddCategoryImage()
+        args = arguments?.getString("id")
+       // Log.d("val1","${args}")
+        fab2!!.setOnClickListener {
+            val AddCategoryImage:Fragment=AddImageToCategoryFragment()
             val bundle = Bundle()
             bundle.putString("id", args)
             AddCategoryImage.arguments = bundle
