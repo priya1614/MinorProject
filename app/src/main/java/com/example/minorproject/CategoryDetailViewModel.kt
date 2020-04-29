@@ -1,11 +1,9 @@
 package com.example.minorproject
 
-import android.util.Log
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.minorproject.model.AddCategoryImageModelClass
-import com.example.minorproject.model.AddCategoryModelClass
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

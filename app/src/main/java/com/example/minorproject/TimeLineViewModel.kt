@@ -7,8 +7,6 @@ import com.example.minorproject.model.TimeLineModelClass
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import java.util.*
-import kotlin.collections.ArrayList
 
 class TimeLineViewModel : ViewModel(),LifecycleObserver
 {

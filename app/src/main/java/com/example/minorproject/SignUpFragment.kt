@@ -1,4 +1,4 @@
-@file:Suppress("DEPRECATION")
+
 
 package com.example.minorproject
 

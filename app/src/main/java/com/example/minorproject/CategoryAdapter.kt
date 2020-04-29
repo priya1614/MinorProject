@@ -32,7 +32,7 @@ class CategoryAdapter(var context: Context, var arrayList: ArrayList<AddCategory
        //     holder.alphas.text = alphaChar.alphaChar
            holder.binding.image.setOnClickListener {
                val bundle = Bundle()
-              val categoryDetail:Fragment = CategoryDetail()
+              val categoryDetail:Fragment = CategoryDetailFragment()
                bundle.putString("id", id)
                categoryDetail.arguments = bundle
                 (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, categoryDetail).addToBackStack("frag2").commit()

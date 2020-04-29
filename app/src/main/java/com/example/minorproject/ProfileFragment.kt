@@ -80,7 +80,7 @@ class ProfileFragment : Fragment()
         fun addphoto()
         {
             auth = FirebaseAuth.getInstance()
-           // Log.d("val","Kuchb")
+
           //  Log.d("val","${filePath}")
 
         mStorageRef = FirebaseStorage.getInstance().getReference()

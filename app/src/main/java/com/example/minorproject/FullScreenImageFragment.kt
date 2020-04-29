@@ -1,11 +1,9 @@
 package com.example.minorproject
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,11 +14,11 @@ import kotlinx.android.synthetic.main.full_screen_image.*
 
 class FullScreenImageFragment :Fragment() {
 
-    var btn: Button? = null
+
     var image: ImageView? = null
     private lateinit var auth: FirebaseAuth
-    var args:String?=null
-    var args2:String?=null
+    var category_id:String?=null
+    var categoryimage_id:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.full_screen_image, container, false)
 
@@ -28,10 +26,10 @@ class FullScreenImageFragment :Fragment() {
       //  Log.d("val", "${args}")
      //   Log.d("val", "${args2}")
 
-        args=arguments?.getString("id1")
-        args2=arguments?.getString("id2")
-        val db = FirebaseFirestore.getInstance().collection("category image").document(args!!)
-        val documentReference = db.collection("category image details").document(args2!!)
+        category_id=arguments?.getString("id1")
+        categoryimage_id=arguments?.getString("id2")
+        val db = FirebaseFirestore.getInstance().collection("category image").document(category_id!!)
+        val documentReference = db.collection("category image details").document(categoryimage_id!!)
         documentReference.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
             image = v?.findViewById(R.id.ac_image3) as ImageView
             val imageUrl: String? = documentSnapshot?.getString("imageUrl")
@@ -47,20 +45,20 @@ class FullScreenImageFragment :Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        args=arguments?.getString("id1")
-        args2=arguments?.getString("id2")
+        category_id=arguments?.getString("id1")
+        categoryimage_id=arguments?.getString("id2")
         delete_image.setOnClickListener {
 
             auth = FirebaseAuth.getInstance()
-                FirebaseFirestore.getInstance().collection("category image").document(args!!)
-          .collection("category image details").document(args2!!).delete().addOnCompleteListener {
+                FirebaseFirestore.getInstance().collection("category image").document(category_id!!)
+          .collection("category image details").document(categoryimage_id!!).delete().addOnCompleteListener {
                 Toast.makeText(context, "deleted", Toast.LENGTH_SHORT).show()
                   FirebaseFirestore.getInstance().collection("timeLine image").document(auth.currentUser!!.uid)
-                        .collection("timeline").document(args2!!).delete().addOnCompleteListener {
+                        .collection("timeline").document(categoryimage_id!!).delete().addOnCompleteListener {
                     (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()
-                    val CategoryDetail: Fragment = CategoryDetail()
+                    val CategoryDetail: Fragment = CategoryDetailFragment()
                     val bundle = Bundle()
-                    bundle.putString("id", args)
+                    bundle.putString("id", category_id)
                     CategoryDetail.arguments = bundle
                     (context as MainActivity).supportFragmentManager.beginTransaction().add(R.id.frame_container, CategoryDetail).commit()
 
