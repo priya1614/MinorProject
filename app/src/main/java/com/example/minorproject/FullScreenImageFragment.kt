@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.full_screen_image.*
+import kotlinx.android.synthetic.main.f_full_screen_image.*
 
 class FullScreenImageFragment :Fragment() {
 
@@ -20,7 +20,7 @@ class FullScreenImageFragment :Fragment() {
     var category_id:String?=null
     var categoryimage_id:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.full_screen_image, container, false)
+        val v = inflater.inflate(R.layout.f_full_screen_image, container, false)
 
 
       //  Log.d("val", "${args}")
@@ -54,7 +54,7 @@ class FullScreenImageFragment :Fragment() {
           .collection("category image details").document(categoryimage_id!!).delete().addOnCompleteListener {
                 Toast.makeText(context, "deleted", Toast.LENGTH_SHORT).show()
                   FirebaseFirestore.getInstance().collection("timeLine image").document(auth.currentUser!!.uid)
-                        .collection("timeline").document(categoryimage_id!!).delete().addOnCompleteListener {
+                        .collection("f_timeline").document(categoryimage_id!!).delete().addOnCompleteListener {
                     (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()
                     val CategoryDetail: Fragment = CategoryDetailFragment()
                     val bundle = Bundle()

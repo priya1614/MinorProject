@@ -9,13 +9,13 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.timeline.*
+import kotlinx.android.synthetic.main.f_timeline.*
 
 class TimelineFragment: Fragment(), LifecycleOwner {
     var TimeLineAdapter: TimeLineAdapter? = null
     var viewModel = TimeLineViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.timeline, container, false)
+        val v = inflater.inflate(R.layout.f_timeline, container, false)
 
         timeline_recyclerview?.setHasFixedSize(true)
         viewModel = ViewModelProvider(this)[TimeLineViewModel::class.java]

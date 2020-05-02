@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import kotlinx.android.synthetic.main.addcategory.*
+import kotlinx.android.synthetic.main.f_addcategory.*
 
 
 class AddCategoryFragment : Fragment() {
@@ -32,7 +32,7 @@ class AddCategoryFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v=inflater.inflate(R.layout.addcategory, container, false)
+        val v=inflater.inflate(R.layout.f_addcategory, container, false)
         return v
     }
 

@@ -18,7 +18,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import kotlinx.android.synthetic.main.add_category_image.*
+import kotlinx.android.synthetic.main.f_add_category_image.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -33,7 +33,7 @@ class AddImageToCategoryFragment : Fragment() {
     private lateinit var mStorageRef: StorageReference
   var categoryimage_id:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v=inflater.inflate(R.layout.add_category_image, container, false)
+        val v=inflater.inflate(R.layout.f_add_category_image, container, false)
 
         return v
 
@@ -78,7 +78,7 @@ class AddImageToCategoryFragment : Fragment() {
                                 .addOnSuccessListener{DocumentReference->
                                     val id=DocumentReference.id
 
-                                                db.collection("timeLine image").document(auth.currentUser!!.uid).collection("timeline").document(id).set(user, SetOptions.merge()).addOnSuccessListener {
+                                                db.collection("timeLine image").document(auth.currentUser!!.uid).collection("f_timeline").document(id).set(user, SetOptions.merge()).addOnSuccessListener {
 
                                                     val categorydetails: Fragment = CategoryDetailFragment()
                                                   //  Log.d("id", "${args}")

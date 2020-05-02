@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.categorylayout.*
+import kotlinx.android.synthetic.main.f_categorylayout.*
 
 
 class CategoryFragment : Fragment(),LifecycleOwner{
@@ -22,7 +22,7 @@ class CategoryFragment : Fragment(),LifecycleOwner{
     var AddCategoryAdapter:CategoryAdapter?=null
     var viewModel=CategoryViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v=inflater.inflate(R.layout.categorylayout, container, false)
+        val v=inflater.inflate(R.layout.f_categorylayout, container, false)
 
         recyclerview?.setHasFixedSize(true)
 

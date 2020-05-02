@@ -17,13 +17,13 @@ class TimeLineViewModel : ViewModel(),LifecycleObserver
         auth = FirebaseAuth.getInstance()
         val arrayList:ArrayList<TimeLineModelClass> = ArrayList()
         val db = FirebaseFirestore.getInstance()
-        db.collection("timeLine image").document(auth.currentUser!!.uid).collection("timeline").orderBy("Date",Query.Direction.DESCENDING).get()
+        db.collection("timeLine image").document(auth.currentUser!!.uid).collection("f_timeline").orderBy("Date",Query.Direction.DESCENDING).get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         for (document in task.result!!) {
                             val date = document.data.get("Date").toString()
                             val imageUrl = document.data.get("imageUrl").toString()
-                     //       Log.d("timeline val", "${imageUrl}")
+                     //       Log.d("f_timeline val", "${imageUrl}")
                             arrayList.add(TimeLineModelClass(imageUrl,date))
                           //  Log.d("cat","${arrayList}")
                             category.postValue(arrayList)

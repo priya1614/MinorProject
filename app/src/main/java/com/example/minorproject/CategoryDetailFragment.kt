@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.category_detail.*
+import kotlinx.android.synthetic.main.f_category_detail.*
 
 class CategoryDetailFragment:Fragment(){
     var gridLayoutManager: GridLayoutManager?=null
@@ -20,7 +20,7 @@ class CategoryDetailFragment:Fragment(){
     var category_id:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-            val v = inflater.inflate(R.layout.category_detail, container, false)
+            val v = inflater.inflate(R.layout.f_category_detail, container, false)
             recyclerview_2?.setHasFixedSize(true)
             auth = FirebaseAuth.getInstance()
              category_id = arguments?.getString("id")

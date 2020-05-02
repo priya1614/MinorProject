@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CategoryFragment"
+    android:background="@drawable/login"
     android:id="@+id/cl2"
 
     >
