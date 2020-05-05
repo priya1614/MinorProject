@@ -26,11 +26,14 @@ import java.time.format.FormatStyle
 
 
 class AddImageToCategoryFragment : Fragment() {
-    private val PICK_IMAGE_REQUEST = 72
+
     private var filePath: Uri? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
   var CategoryImage_id:String?=null
+    companion object{
+        var PICK_IMAGE_REQUEST=72
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.f_add_category_image, container, false)
     }

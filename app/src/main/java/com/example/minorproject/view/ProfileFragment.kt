@@ -27,11 +27,13 @@ import kotlinx.android.synthetic.main.profile.*
 class ProfileFragment : Fragment()
 {
 
-    var PICK_IMAGE_REQUEST=73
+
     private var filePath: Uri? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
-
+    companion object{
+        var PICK_IMAGE_REQUEST=73
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         auth = FirebaseAuth.getInstance()
@@ -122,6 +124,7 @@ class ProfileFragment : Fragment()
         }}}}}
 
     private fun launchGallery() {
+
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT

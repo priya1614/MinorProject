@@ -24,10 +24,13 @@ import kotlinx.android.synthetic.main.f_addcategory.*
 
 
 class AddCategoryFragment : Fragment() {
-    private val PICK_IMAGE_REQUEST = 72
+
     private var filePath: Uri? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
+    companion object{
+        var PICK_IMAGE_REQUEST=71
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v=inflater.inflate(R.layout.f_addcategory, container, false)
         return v
