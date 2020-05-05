@@ -13,23 +13,21 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.f_category_detail.*
 
 class CategoryDetailFragment:Fragment(){
-    var gridLayoutManager: GridLayoutManager?=null
-    var AddCategoryImageAdapter:CategoryDetailAdapter?=null
+
     private lateinit var auth: FirebaseAuth
-    var viewModel2=CategoryDetailViewModel()
     var category_id:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
             val v = inflater.inflate(R.layout.f_category_detail, container, false)
-            recyclerview_2?.setHasFixedSize(true)
+            recyclerview_category_detail?.setHasFixedSize(true)
             auth = FirebaseAuth.getInstance()
              category_id = arguments?.getString("id")
-            viewModel2 = ViewModelProvider(this)[CategoryDetailViewModel::class.java]
-            viewModel2.getcategory(category_id!!).observe(this, Observer { arraylist ->
-                AddCategoryImageAdapter = context?.let { CategoryDetailAdapter(it, arraylist!!) }
-                gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
-                recyclerview_2?.layoutManager = gridLayoutManager
-                recyclerview_2!!.adapter = AddCategoryImageAdapter
+            val CategoryDetailViewModel = ViewModelProvider(this)[CategoryDetailViewModel::class.java]
+            CategoryDetailViewModel.getcategory(category_id!!).observe(this, Observer { arraylist ->
+               val  CategoryDetailAdapter= context?.let { CategoryDetailAdapter(it, arraylist!!) }
+               val gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
+                recyclerview_category_detail?.layoutManager = gridLayoutManager
+                recyclerview_category_detail?.adapter = CategoryDetailAdapter
 
             })
 
@@ -39,8 +37,7 @@ class CategoryDetailFragment:Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         category_id = arguments?.getString("id")
-       // Log.d("val1","${args}")
-        fab2!!.setOnClickListener {
+        fab2?.setOnClickListener {
             val AddCategoryImage:Fragment=AddImageToCategoryFragment()
             val bundle = Bundle()
             bundle.putString("id", category_id)

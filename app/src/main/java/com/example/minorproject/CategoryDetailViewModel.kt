@@ -12,8 +12,6 @@ class CategoryDetailViewModel :ViewModel(),LifecycleObserver
         var category2= MutableLiveData<ArrayList<AddCategoryImageModelClass>>()
 
         private lateinit var auth: FirebaseAuth
-
-
         internal fun getcategory(id2:String): MutableLiveData<ArrayList<AddCategoryImageModelClass>> {
             auth = FirebaseAuth.getInstance()
 

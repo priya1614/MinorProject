@@ -27,8 +27,6 @@ import java.time.format.FormatStyle
 class AddImageToCategoryFragment : Fragment() {
     private val PICK_IMAGE_REQUEST = 72
     private var filePath: Uri? = null
-    private var imageview: ImageView? = null
-    private var addimage: Button?=null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
   var categoryimage_id:String?=null
@@ -40,10 +38,9 @@ class AddImageToCategoryFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addimage = view.findViewById<View>(R.id.ac_addimage2) as Button
+      val  addimage = view.findViewById<View>(R.id.ac_addimage2) as Button
         categoryimage_id = arguments?.getString("id")
-        imageview = view.findViewById<View>(R.id.ac_image2) as ImageView
-        addimage?.setOnClickListener { launchGallery() }
+        addimage.setOnClickListener { launchGallery() }
         add_category_image_button.setOnClickListener {
             auth = FirebaseAuth.getInstance()
             mStorageRef = FirebaseStorage.getInstance().getReference()

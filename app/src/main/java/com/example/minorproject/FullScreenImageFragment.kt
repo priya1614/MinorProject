@@ -22,10 +22,6 @@ class FullScreenImageFragment :Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.f_full_screen_image, container, false)
 
-
-      //  Log.d("val", "${args}")
-     //   Log.d("val", "${args2}")
-
         category_id=arguments?.getString("id1")
         categoryimage_id=arguments?.getString("id2")
         val db = FirebaseFirestore.getInstance().collection("category image").document(category_id!!)
@@ -33,7 +29,6 @@ class FullScreenImageFragment :Fragment() {
         documentReference.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
             image = v?.findViewById(R.id.ac_image3) as ImageView
             val imageUrl: String? = documentSnapshot?.getString("imageUrl")
-        //    Log.d("val", "${imageUrl}")
             Picasso.get().load(imageUrl)
                     .into(image)
 

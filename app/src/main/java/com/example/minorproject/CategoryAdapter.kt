@@ -29,7 +29,7 @@ class CategoryAdapter(var context: Context, var arrayList: ArrayList<AddCategory
            Glide.with(context)
                   .load(alphaChar.iconsChar)
                    .into(holder.binding.image)
-       //     holder.alphas.text = alphaChar.alphaChar
+
            holder.binding.image.setOnClickListener {
                val bundle = Bundle()
               val categoryDetail:Fragment = CategoryDetailFragment()
@@ -39,8 +39,7 @@ class CategoryAdapter(var context: Context, var arrayList: ArrayList<AddCategory
         }
     }
     class ItemHolder(var binding: ListItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
-       // var icons:ImageView= ItemView.findViewById<ImageView>(R.id.image)
-       // var alphas:TextView = ItemView.findViewById<TextView>(R.id.text)
+
     }
 
 }

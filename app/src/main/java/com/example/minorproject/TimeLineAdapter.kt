@@ -17,16 +17,12 @@ import kotlin.collections.ArrayList
 class TimeLineAdapter(var context: Context, var arrayList: ArrayList<TimeLineModelClass>): RecyclerView.Adapter<TimeLineAdapter.ItemHolder >() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ItemHolder {
-
-        //   val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item_categorydetail, parent, false)
-        // return ItemHolder(itemHolder)
         val inflater= LayoutInflater.from(parent.context)
         val  binding: ListItemTimelineBinding= DataBindingUtil.inflate(inflater, R.layout.list_item_timeline, parent, false)
         return ItemHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        Log.d("arraysize","${arrayList.size}")
         return arrayList.size
     }
     override fun onBindViewHolder(holder:ItemHolder, position: Int) {
@@ -42,12 +38,7 @@ class TimeLineAdapter(var context: Context, var arrayList: ArrayList<TimeLineMod
                 .into(holder.binding.image3)
 
         }
-
-    // class ItemHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-    //   var icons: ImageView = ItemView.findViewById<ImageView>(R.id.image2)
     class ItemHolder(var binding: ListItemTimelineBinding) : RecyclerView.ViewHolder(binding.root) {
-        // var icons:ImageView= ItemView.findViewById<ImageView>(R.id.image)
-        // var alphas:TextView = ItemView.findViewById<TextView>(R.id.text)
     }
 
 }

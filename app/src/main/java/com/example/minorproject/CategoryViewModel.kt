@@ -27,9 +27,7 @@ class CategoryViewModel :ViewModel(),LifecycleObserver
                             val id = document.id
                             val imageUrl = document.data.get("imageUrl").toString()
                             val title = document.data.get("Title").toString()
-                         //   Log.d("vall", "${imageUrl}")
                            arrayList.add(AddCategoryModelClass(imageUrl,title,id))
-                          //  Log.d("cat","${arrayList}")
                             category.postValue(arrayList)
                         }
                     }

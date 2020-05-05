@@ -26,8 +26,6 @@ class ProfileFragment : Fragment()
     private lateinit var pemail:TextView
     var PICK_IMAGE_REQUEST=73
     private var filePath: Uri? = null
-    private var pbtn: Button? = null
-    private var pbtn2: Button? = null
     private lateinit var auth: FirebaseAuth
     private var imageview: ImageView? = null
     private lateinit var mStorageRef: StorageReference

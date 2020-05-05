@@ -14,9 +14,6 @@ import kotlinx.android.synthetic.main.f_categorylayout.*
 
 
 class CategoryFragment : Fragment(),LifecycleOwner{
-
-
-
     var gridLayoutManager: GridLayoutManager?=null
 
     var AddCategoryAdapter:CategoryAdapter?=null

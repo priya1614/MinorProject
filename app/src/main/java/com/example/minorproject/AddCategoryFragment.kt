@@ -25,10 +25,6 @@ import kotlinx.android.synthetic.main.f_addcategory.*
 class AddCategoryFragment : Fragment() {
     private val PICK_IMAGE_REQUEST = 72
     private var filePath: Uri? = null
-    private var imageview: ImageView? = null
-    private var text: EditText? = null
-    private var add:Button?=null
-    private var addimage:Button?=null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,13 +34,13 @@ class AddCategoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addimage = view.findViewById<View>(R.id.ac_addimage) as Button
+       val addimage = view.findViewById<View>(R.id.ac_addimage) as Button
 
-       text = view.findViewById<View>(R.id.ac_title) as EditText
-        imageview = view.findViewById<View>(R.id.ac_image) as ImageView
-        addimage!!.setOnClickListener { launchGallery() }
+      val text = view.findViewById<View>(R.id.ac_title) as EditText
+       var  imageview = view.findViewById<View>(R.id.ac_image) as ImageView
+        addimage.setOnClickListener { launchGallery() }
         add_category_button.setOnClickListener {
-            val title = text!!.text.toString()
+            val title = text.text.toString()
             auth = FirebaseAuth.getInstance()
             mStorageRef = FirebaseStorage.getInstance().getReference()
             if(filePath != null){
@@ -96,8 +92,7 @@ class AddCategoryFragment : Fragment() {
                 return
             }
 
-            filePath = data.data
-
+             filePath = data.data
         }
     }
 

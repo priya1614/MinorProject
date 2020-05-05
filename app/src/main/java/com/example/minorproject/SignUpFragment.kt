@@ -26,12 +26,8 @@ import kotlin.collections.HashMap
 
 
 class SignUpFragment : Fragment() {
-    var semail: EditText? = null
-    var sname: EditText? = null
-    var spass: EditText? = null
     private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
-    private var choose: Button? = null
     private var imageview: ImageView? = null
 
     private lateinit var auth: FirebaseAuth
@@ -45,10 +41,10 @@ class SignUpFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        semail = view.findViewById<View>(R.id.signup_email) as EditText
-        sname = view.findViewById<View>(R.id.signup_name) as EditText
-        spass = view.findViewById<View>(R.id.signup_password) as EditText
-
+      val  semail = view.findViewById<View>(R.id.signup_email) as EditText
+       val sname = view.findViewById<View>(R.id.signup_name) as EditText
+      val  spass = view.findViewById<View>(R.id.signup_password) as EditText
+       login.setOnClickListener {  (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()}
 
 
         imageview = view.findViewById<View>(R.id.iv) as ImageView
@@ -58,19 +54,20 @@ class SignUpFragment : Fragment() {
         mStorageRef = FirebaseStorage.getInstance().getReference()
 
 
+
         btn_signup2!!.setOnClickListener {
             auth = FirebaseAuth.getInstance()
             mStorageRef = FirebaseStorage.getInstance().getReference()
-            val Email2 = semail!!.text.toString()
-            val password2 = spass!!.text.toString()
-            val name = sname!!.text.toString()
+            val Email2 = semail.text.toString()
+            val password2 = spass.text.toString()
+            val name = sname.text.toString()
             if (name.isEmpty()) {
-                sname!!.error = "fill name"
+                sname.error = "username can not be empty"
 
             } else if (password2.isEmpty()) {
-                spass!!.error = "password of atleast 6 character"
+                spass.error = "password of atleast 6 character"
             } else if (Email2.isEmpty()) {
-                semail!!.error = "Fill valid email address"
+                semail.error = "Fill valid email address"
             } else {
                 auth.createUserWithEmailAndPassword(Email2, password2)
                         .addOnCompleteListener { task ->

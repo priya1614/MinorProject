@@ -23,9 +23,7 @@ class TimeLineViewModel : ViewModel(),LifecycleObserver
                         for (document in task.result!!) {
                             val date = document.data.get("Date").toString()
                             val imageUrl = document.data.get("imageUrl").toString()
-                     //       Log.d("f_timeline val", "${imageUrl}")
                             arrayList.add(TimeLineModelClass(imageUrl,date))
-                          //  Log.d("cat","${arrayList}")
                             category.postValue(arrayList)
                         }
                     }

@@ -11,8 +11,6 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    var email: EditText? = null
-    var pass: EditText? = null
     private lateinit var auth: FirebaseAuth
 
     var model=BottomNavigationFragment()
@@ -20,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        email = findViewById<View>(R.id.input_email) as EditText
-        pass = findViewById<View>(R.id.input_password) as EditText
+       val email = findViewById<View>(R.id.input_email) as EditText
+       val pass = findViewById<View>(R.id.input_password) as EditText
         auth = FirebaseAuth.getInstance()
 
         btn_signup.setOnClickListener {
@@ -34,12 +32,12 @@ class MainActivity : AppCompatActivity() {
             ft.commit()
         }
         btn_login.setOnClickListener {
-            val Email = email!!.text.toString()
-            val password = pass!!.text.toString()
+            val Email = email.text.toString()
+            val password = pass.text.toString()
             if (Email.isEmpty()) {
-                email!!.error = "Enter valid email address"
+                email.error = "Enter valid email address"
             } else if (password.isEmpty()) {
-                pass!!.error = "Enter password of atleast 6 character"
+                pass.error = "Enter password of atleast 6 character"
             } else{
                 auth.signInWithEmailAndPassword(Email, password)
                         .addOnCompleteListener(this@MainActivity) { task ->
@@ -49,8 +47,7 @@ class MainActivity : AppCompatActivity() {
 
                                 val user = auth.getCurrentUser()
                                 updateUI(user)
-                            } else { // If sign in fails, display a message to the user.
-                              //  Log.w(TAG, "signInWithEmail:failure", task.exception)
+                            } else {
                                 Toast.makeText(this@MainActivity, "email id or password are incorrecct",
                                         Toast.LENGTH_SHORT).show()
                             }
@@ -58,13 +55,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-
-    }
-
     private fun updateUI(user: FirebaseUser?) {
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()

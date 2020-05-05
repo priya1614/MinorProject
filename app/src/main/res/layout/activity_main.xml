@@ -29,7 +29,8 @@
             android:hint="@string/email"
             android:textColor="#FFFFFF"
             android:inputType="textEmailAddress"
-            android:textColorHint="@android:color/white" />
+            android:textColorHint="@android:color/white"
+            android:autofillHints="@string/email" />
 
 
         <!-- Password Label -->
@@ -42,7 +43,8 @@
 
             android:textColor="#FFFFFF"
             android:inputType="textPassword"
-            android:textColorHint="#FFFFFF" />
+            android:textColorHint="#FFFFFF"
+            android:autofillHints="@string/password" />
 
 
        <Button

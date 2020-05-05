@@ -16,16 +16,12 @@ import com.example.minorproject.model.AddCategoryImageModelClass
 class CategoryDetailAdapter(var context: Context, var arrayList: ArrayList<AddCategoryImageModelClass>): RecyclerView.Adapter<CategoryDetailAdapter.ItemHolder >() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ItemHolder {
-
-     //   val itemHolder = LayoutInflater.from(parent.context).inflate(R.layout.list_item_categorydetail, parent, false)
-       // return ItemHolder(itemHolder)
         val inflater= LayoutInflater.from(parent.context)
         val  binding:ListItemCategorydetailBinding = DataBindingUtil.inflate(inflater, R.layout.list_item_categorydetail, parent, false)
         return ItemHolder(binding)
     }
 
     override fun getItemCount(): Int {
-      //  Log.d("arraysize","${arrayList.size}")
         return arrayList.size
     }
     override fun onBindViewHolder(holder:ItemHolder, position: Int) {
@@ -53,11 +49,7 @@ class CategoryDetailAdapter(var context: Context, var arrayList: ArrayList<AddCa
             }
         }
 
-   // class ItemHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-     //   var icons: ImageView = ItemView.findViewById<ImageView>(R.id.image2)
    class ItemHolder(var binding: ListItemCategorydetailBinding) : RecyclerView.ViewHolder(binding.root) {
-       // var icons:ImageView= ItemView.findViewById<ImageView>(R.id.image)
-       // var alphas:TextView = ItemView.findViewById<TextView>(R.id.text)
    }
 
     }

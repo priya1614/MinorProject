@@ -24,7 +24,7 @@ class TimelineFragment: Fragment(), LifecycleOwner {
             TimeLineAdapter = context?.let { TimeLineAdapter(it, arraylist!!) }
             timeline_recyclerview?.layoutManager = LinearLayoutManager(context)
 
-            timeline_recyclerview!!.adapter = TimeLineAdapter
+            timeline_recyclerview?.adapter = TimeLineAdapter
 
         })
 
