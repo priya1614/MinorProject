@@ -1,4 +1,4 @@
-package com.example.minorproject
+package com.example.minorproject.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.minorproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.f_full_screen_image.*
 
-class FullScreenImageFragment :Fragment() {
+class  FullScreenImageFragment :Fragment() {
 
-
-    var image: ImageView? = null
     private lateinit var auth: FirebaseAuth
     var category_id:String?=null
     var categoryimage_id:String?=null
@@ -27,10 +26,9 @@ class FullScreenImageFragment :Fragment() {
         val db = FirebaseFirestore.getInstance().collection("category image").document(category_id!!)
         val documentReference = db.collection("category image details").document(categoryimage_id!!)
         documentReference.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-            image = v?.findViewById(R.id.ac_image3) as ImageView
             val imageUrl: String? = documentSnapshot?.getString("imageUrl")
             Picasso.get().load(imageUrl)
-                    .into(image)
+                    .into(ac_imageview_fullscreen)
 
         }
 

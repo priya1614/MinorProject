@@ -1,4 +1,4 @@
-package com.example.minorproject
+package com.example.minorproject.view
 
 import android.content.Context
 import android.util.Log
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.minorproject.R
 
 
 import com.example.minorproject.databinding.ListItemTimelineBinding
@@ -32,7 +33,7 @@ class TimeLineAdapter(var context: Context, var arrayList: ArrayList<TimeLineMod
 
         val alphaChar: TimeLineModelClass = arrayList.get(position)
 
-        holder.binding.date.text =(alphaChar.date!!).toString()
+        holder.binding.date.text =(alphaChar.date).toString()
         Glide.with(context)
                 .load(alphaChar.image).apply(RequestOptions.circleCropTransform())
                 .into(holder.binding.image3)

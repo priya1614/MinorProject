@@ -16,6 +16,12 @@
     <string name="choose_profile_picture">choose profile picture</string>
     <string name="delete_image">Delete image</string>
     <string name="already_have_account">already have account?</string>
+    <string name="add_category_image">add_category image</string>
+
+    <string name="change_profile_picture">change profile picture</string>
+    <string name="logout">LOGOUT</string>
+    <string name="already_have_an_account">already have an account ?</string>
+
 
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.minorproject
+package com.example.minorproject.view
 
 import android.app.Activity
 import android.content.Intent
@@ -13,21 +13,23 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.minorproject.R
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.profile.*
 
 
 class ProfileFragment : Fragment()
 {
-    private lateinit var pname:TextView
-    private lateinit var pemail:TextView
+
     var PICK_IMAGE_REQUEST=73
     private var filePath: Uri? = null
     private lateinit var auth: FirebaseAuth
-    private var imageview: ImageView? = null
     private lateinit var mStorageRef: StorageReference
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,15 +43,18 @@ class ProfileFragment : Fragment()
             val name: String? = documentSnapshot?.getString("name")
             val imagurl: String? = documentSnapshot?.getString("imageUrl")
            // Log.d("vaal","${imagurl}")
+            if(imagurl!=null)
+            {
+                Glide.with(this).load(imagurl).apply(RequestOptions.circleCropTransform())
+                        .into(profile_imageview)
+            }
 
-            pemail = view?.findViewById<View>(R.id.profile_email) as TextView
-            pemail.setText(email).toString()
-            pname = view?.findViewById<View>(R.id.profile_name) as TextView
-            pname.setText(name).toString()
 
-            imageview = view?.findViewById<ImageView>(R.id.iv2) as ImageView
-            Glide.with(this).load(imagurl).apply(RequestOptions.circleCropTransform())
-                    .into(imageview!!)
+
+            profile_email.setText(email).toString()
+            profile_name.setText(name).toString()
+
+
 
         }
         return inflater.inflate(R.layout.profile, container, false)
@@ -57,7 +62,6 @@ class ProfileFragment : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mStorageRef = FirebaseStorage.getInstance().getReference()
         auth = FirebaseAuth.getInstance()
         btn_logout.setOnClickListener {
@@ -68,7 +72,8 @@ class ProfileFragment : Fragment()
             val intent = Intent(this.context, MainActivity::class.java)
             startActivity(intent)
         }
-        iv2.setOnClickListener {
+        profile_imageview
+                .setOnClickListener {
             launchGallery()
 
 
@@ -85,7 +90,15 @@ class ProfileFragment : Fragment()
         if(filePath != null) {
 
             val ref = mStorageRef.child("uploads/" + auth.currentUser!!.uid)
-            ref.putFile(filePath!!)
+            val uploadTask = ref.putFile(filePath!!)
+            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                return@Continuation ref.downloadUrl
+            })
           .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val db = FirebaseFirestore.getInstance()
@@ -103,11 +116,9 @@ class ProfileFragment : Fragment()
                     user["password"] = password.toString()
                     user["imageUrl"] = uri
 
-                    db.collection("user").document(auth.currentUser!!.uid).set(user as Map<String, Any>)
-
-                            .addOnSuccessListener { documentReference ->
-                                //Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                            }
+                    db.collection("user").document(auth.currentUser!!.uid).set(user)
+                        Glide.with(this).load(uri).apply(RequestOptions.circleCropTransform())
+                                .into(profile_imageview)
         }}}}}
 
     private fun launchGallery() {

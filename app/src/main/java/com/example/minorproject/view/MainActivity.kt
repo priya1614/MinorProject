@@ -1,11 +1,13 @@
-package com.example.minorproject
+package com.example.minorproject.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.minorproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 
             val fm = supportFragmentManager
             val ft = fm.beginTransaction()
-            val signup: Fragment = SignUpFragment()
-            ft.add(R.id.cl, signup)
+            val SignUpFragment: Fragment = SignUpFragment()
+            ft.add(R.id.cl, SignUpFragment)
             ft.addToBackStack("frag1")
             ft.commit()
         }

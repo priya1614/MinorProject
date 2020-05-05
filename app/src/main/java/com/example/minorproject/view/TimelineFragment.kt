@@ -1,4 +1,4 @@
-package com.example.minorproject
+package com.example.minorproject.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.minorproject.R
+import com.example.minorproject.viewmodel.TimeLineViewModel
 import kotlinx.android.synthetic.main.f_timeline.*
 
 class TimelineFragment: Fragment(), LifecycleOwner {
@@ -21,13 +23,12 @@ class TimelineFragment: Fragment(), LifecycleOwner {
         viewModel = ViewModelProvider(this)[TimeLineViewModel::class.java]
         viewModel.getTimeline().observe(this, Observer { arraylist ->
 
-            TimeLineAdapter = context?.let { TimeLineAdapter(it, arraylist!!) }
+            TimeLineAdapter = context?.let { TimeLineAdapter(it, arraylist) }
             timeline_recyclerview?.layoutManager = LinearLayoutManager(context)
 
             timeline_recyclerview?.adapter = TimeLineAdapter
 
         })
-
         return v
     }
 }

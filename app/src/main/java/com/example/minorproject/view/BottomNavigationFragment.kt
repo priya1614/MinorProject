@@ -1,10 +1,11 @@
-package com.example.minorproject
+package com.example.minorproject.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.minorproject.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BottomNavigationFragment :Fragment()
@@ -13,8 +14,8 @@ class BottomNavigationFragment :Fragment()
         super.onCreate(savedInstanceState)
         if(savedInstanceState==null)
         {
-            val category:Fragment=CategoryFragment()
-            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,category).commit()
+            val ProfileFragment:Fragment=ProfileFragment()
+            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,ProfileFragment).commit()
 
         }
     }
@@ -26,18 +27,18 @@ class BottomNavigationFragment :Fragment()
         nav.setOnNavigationItemSelectedListener{item->
             when(item.itemId){
                 R.id.navigation_category -> {
-                    val category:Fragment=CategoryFragment()
-                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,category).commit()
+                    val CategoryFragment:Fragment=CategoryFragment()
+                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,CategoryFragment).commit()
                     true
                 }
                 R.id.navigation_timeline-> {
-                    val timeline:Fragment=TimelineFragment()
-                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,timeline).commit()
+                    val TimelineFragment:Fragment=TimelineFragment()
+                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,TimelineFragment).commit()
                     true
                 }R.id.navigation_profile -> {
 
-                val profile:Fragment=ProfileFragment()
-                (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,profile).commit()
+                val ProfileFragment:Fragment=ProfileFragment()
+                (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,ProfileFragment).commit()
                 true
 
             }else -> false

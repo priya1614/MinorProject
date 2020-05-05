@@ -5,43 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context=".SignUpFragment"
+    tools:context=".view.SignUpFragment"
     android:background="@drawable/login">
-    <LinearLayout
-        android:paddingTop="35dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-      app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:foregroundGravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/ll"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_gravity="center">
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:foregroundGravity="center"
-        android:background="#FFFFFF"
-
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_person_black_profile"
-       />
-        <Button
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn"
-            android:text="@string/choose_profile_picture"
-            >
-
-        </Button>
-
-</LinearLayout>
 
     <LinearLayout
         android:paddingTop="35dp"
@@ -50,7 +15,7 @@
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:orientation="vertical"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
@@ -89,7 +54,7 @@
             android:autofillHints="@string/password" />
 
         <Button
-            android:id="@+id/btn_signup2"
+            android:id="@+id/btn_signup_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -101,7 +66,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/already_have_account"
+            android:text="@string/already_have_an_account"
             >
 
         </TextView>

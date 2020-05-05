@@ -1,4 +1,4 @@
-package com.example.minorproject
+package com.example.minorproject.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,25 +10,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.minorproject.R
+import com.example.minorproject.viewmodel.CategoryViewModel
 import kotlinx.android.synthetic.main.f_categorylayout.*
 
 
 class CategoryFragment : Fragment(),LifecycleOwner{
-    var gridLayoutManager: GridLayoutManager?=null
-
-    var AddCategoryAdapter:CategoryAdapter?=null
-    var viewModel=CategoryViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v=inflater.inflate(R.layout.f_categorylayout, container, false)
 
         recyclerview?.setHasFixedSize(true)
 
-        viewModel=ViewModelProvider(this)[CategoryViewModel::class.java]
-        viewModel.getcategory().observe(this, Observer{arraylist->
-            AddCategoryAdapter=context?.let { CategoryAdapter(it, arraylist!!) }
-            gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
+        val CategoryViewModel=ViewModelProvider(this)[CategoryViewModel::class.java]
+        CategoryViewModel.getcategory().observe(this, Observer{arraylist->
+           val CategoryAdapter=context?.let { CategoryAdapter(it, arraylist!!) }
+           val gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
             recyclerview?.layoutManager = gridLayoutManager
-            recyclerview?.adapter=AddCategoryAdapter
+            recyclerview?.adapter=CategoryAdapter
 
         })
 
@@ -36,7 +34,7 @@ class CategoryFragment : Fragment(),LifecycleOwner{
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fab!!.setOnClickListener {
+        category_floating_button.setOnClickListener {
             val AddCategory:Fragment=AddCategoryFragment()
             (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,AddCategory).addToBackStack("frag3").commit()
         }
