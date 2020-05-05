@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/login"
     android:layout_gravity="center"
     android:gravity="center"
+    android:background="@color/cardview_light_background"
 
     tools:context=".view.ProfileFragment"
   >
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:lineSpacingExtra="10sp"
-        android:textColor="?attr/colorButtonNormal"
+        android:textColor="@android:color/holo_blue_light"
         android:textSize="22sp"
         android:textStyle="bold"
         android:typeface="serif"
@@ -44,7 +44,7 @@
         android:text="@string/email"
         android:textAlignment="viewEnd"
         android:textAllCaps="false"
-        android:textColor="?attr/colorButtonNormal"
+        android:textColor="@android:color/holo_blue_light"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -58,6 +58,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="@android:color/white"
         android:text="@string/change_profile_picture">
 
     </Button>
@@ -68,7 +70,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
-        android:text="@string/logout" />
+        android:text="@string/logout"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="@android:color/white"/>
 
 
 

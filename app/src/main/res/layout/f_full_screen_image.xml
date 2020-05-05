@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
+android:background="@color/cardview_light_background"
     tools:context=".view.FullScreenImageFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -19,7 +19,9 @@
 
         <Button
             android:id="@+id/delete_image"
-
+            android:background="#000000"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="@+id/ac_imageview_fullscreen"
             app:layout_constraintBottom_toBottomOf="@+id/ac_imageview_fullscreen"
             android:layout_marginBottom="70dp"

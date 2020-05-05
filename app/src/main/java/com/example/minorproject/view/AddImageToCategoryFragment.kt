@@ -32,10 +32,7 @@ class AddImageToCategoryFragment : Fragment() {
     private lateinit var mStorageRef: StorageReference
   var CategoryImage_id:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v=inflater.inflate(R.layout.f_add_category_image, container, false)
-
-        return v
-
+        return inflater.inflate(R.layout.f_add_category_image, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
