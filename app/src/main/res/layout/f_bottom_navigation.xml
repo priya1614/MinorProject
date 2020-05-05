@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.BottomNavigationFragment"
-android:background="@color/cardview_light_background"
+android:background="#FFFFFF"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
