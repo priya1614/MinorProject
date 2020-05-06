@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/allura</item>
+        <item>@font/bangers</item>
+        <item>@font/dynalight</item>
+        <item>@font/galada</item>
+        <item>@font/jolly_lodger</item>
+        <item>@font/yellowtail</item>
+    </array>
+</resources>
