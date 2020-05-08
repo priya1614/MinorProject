@@ -74,9 +74,6 @@ class ProfileFragment : Fragment()
         fun addphoto()
         {
             auth = FirebaseAuth.getInstance()
-
-          //  Log.d("val","${filePath}")
-
         mStorageRef = FirebaseStorage.getInstance().getReference()
         if(filePath != null) {
 

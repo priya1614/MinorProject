@@ -10,7 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.minorproject.R
+import com.example.minorproject.viewmodel.AddCategoryViewModel
+import com.example.minorproject.viewmodel.AddImageToCategoryViewModel
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -20,17 +25,16 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.f_add_category_image.*
+import kotlinx.android.synthetic.main.f_addcategory.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 
-class AddImageToCategoryFragment : Fragment() {
+class AddImageToCategoryFragment : Fragment(),View.OnClickListener,LifecycleOwner {
 
     private var filePath: Uri? = null
-    private lateinit var auth: FirebaseAuth
-    private lateinit var mStorageRef: StorageReference
-  var CategoryImage_id:String?=null
+    var CategoryImage_id:String?=null
     companion object{
         var PICK_IMAGE_REQUEST=72
     }
@@ -40,53 +44,38 @@ class AddImageToCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CategoryImage_id = arguments?.getString("id")
-        select_category_image.setOnClickListener { launchGallery() }
-        add_category_image_button.setOnClickListener {
-            auth = FirebaseAuth.getInstance()
-            mStorageRef = FirebaseStorage.getInstance().getReference()
-            if(filePath != null){
-                val ref = mStorageRef.child("category detail image/" +CategoryImage_id )
-
-                val uploadTask = ref.putFile(filePath!!)
-
-                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                    if (!task.isSuccessful) {
-                        task.exception?.let {
-                            throw it
-                        }
-                    }
-                    return@Continuation ref.downloadUrl
-                }).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val user: MutableMap<String,Any> = HashMap()
-
-                        val downloadUri = task.result
-                        val uri=downloadUri.toString()
-                        val date = LocalDateTime.now()
-                        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
-                        val formatted = date.format(formatter)
-                        user["Date"]=formatted
-                        user["imageUrl"] = uri
-
-                        val db = FirebaseFirestore.getInstance()
-                        db.collection("category image").document(CategoryImage_id!!).collection("category image details").add(user)
-                                .addOnSuccessListener{DocumentReference->
-                                    val id=DocumentReference.id
-
-                                                db.collection("timeLine image").document(auth.currentUser!!.uid).collection("f_timeline").document(id).set(user, SetOptions.merge()).addOnSuccessListener {
-
-                                                    val CategoryDetails: Fragment = CategoryDetailFragment()
-                                                    val Bundle = Bundle()
-                                                    Bundle.putString("id",CategoryImage_id)
-                                                    CategoryDetails.arguments = Bundle
-                                                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, CategoryDetails).addToBackStack("frag6").commit()
-
-                                                }
-
-            }}}}
-
-        }
+        setListeners()
     }
+    private fun setListeners() {
+        select_category_image.setOnClickListener(this)
+        add_category_image_button.setOnClickListener (this)
+    }
+    override fun onClick(view: View?) {
+        if (view == select_category_image)
+            launchGallery()
+        else if (view == add_category_image_button) {
+            gotoObserver()
+        }}
+fun gotoObserver() {
+    val mViewModel= ViewModelProvider(this)[AddImageToCategoryViewModel::class.java]
+    mViewModel.onAddCategoryImage(filePath!!,CategoryImage_id!!).observe(this, Observer { Boolean->
+        if(Boolean==true) {
+            gotoCategoryDetailImageFragment()
+        }
+    })}
+
+
+    fun gotoCategoryDetailImageFragment() {
+        val CategoryDetails: Fragment = CategoryDetailFragment()
+        val Bundle = Bundle()
+        Bundle.putString("id", CategoryImage_id)
+        CategoryDetails.arguments = Bundle
+        (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, CategoryDetails).addToBackStack("frag6").commit()
+
+    }
+
+
+
     private fun launchGallery() {
         val intent = Intent()
         intent.type = "image/*"

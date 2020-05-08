@@ -20,7 +20,6 @@ class  FullScreenImageFragment :Fragment() {
     var categoryimage_id:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.f_full_screen_image, container, false)
-
         category_id=arguments?.getString("id1")
         categoryimage_id=arguments?.getString("id2")
         val db = FirebaseFirestore.getInstance().collection("category image").document(category_id!!)
@@ -29,13 +28,9 @@ class  FullScreenImageFragment :Fragment() {
             val imageUrl: String? = documentSnapshot?.getString("imageUrl")
             Picasso.get().load(imageUrl)
                     .into(ac_imageview_fullscreen)
-
         }
-
         return v
-
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         category_id=arguments?.getString("id1")
@@ -54,9 +49,7 @@ class  FullScreenImageFragment :Fragment() {
                     bundle.putString("id", category_id)
                     CategoryDetail.arguments = bundle
                     (context as MainActivity).supportFragmentManager.beginTransaction().add(R.id.frame_container, CategoryDetail).commit()
-
                 }
-
             }
         }
     }}
