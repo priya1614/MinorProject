@@ -14,14 +14,14 @@
         android:paddingRight="24dp"
         android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
 
         android:orientation="vertical"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         >
         <TextView
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/engagement"
@@ -36,6 +36,7 @@
 
 
         <EditText
+            android:defaultFocusHighlightEnabled="true"
             android:layout_marginTop="90dp"
             android:paddingLeft="10dp"
             android:background="@drawable/style"
@@ -44,12 +45,15 @@
             android:layout_height="50dp"
             android:hint="Name"
             android:textColor="#000000"
+            android:nextFocusDown="@+id/signup_email"
 
             android:textColorHint="@android:color/black"
             android:autofillHints="@string/name"
             android:inputType="text" />
 
         <EditText
+            android:nextFocusDown="@+id/signup_password"
+            android:defaultFocusHighlightEnabled="true"
             android:paddingLeft="10dp"
             android:background="@drawable/style"
             android:layout_marginTop="20dp"
@@ -64,6 +68,8 @@
 
 
         <EditText
+            android:nextFocusDown="@+id/btn_signup_signup"
+            android:defaultFocusHighlightEnabled="true"
             android:paddingLeft="10dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/style"
@@ -77,6 +83,7 @@
             android:autofillHints="@string/password" />
 
         <Button
+            android:defaultFocusHighlightEnabled="true"
             android:background="@drawable/style"
             android:id="@+id/btn_signup_signup"
             android:textSize="15sp"

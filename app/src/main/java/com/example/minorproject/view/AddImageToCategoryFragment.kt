@@ -65,9 +65,7 @@ class AddImageToCategoryFragment : Fragment() {
                         val date = LocalDateTime.now()
                         val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
                         val formatted = date.format(formatter)
-
                         user["Date"]=formatted
-
                         user["imageUrl"] = uri
 
                         val db = FirebaseFirestore.getInstance()
@@ -78,18 +76,12 @@ class AddImageToCategoryFragment : Fragment() {
                                                 db.collection("timeLine image").document(auth.currentUser!!.uid).collection("f_timeline").document(id).set(user, SetOptions.merge()).addOnSuccessListener {
 
                                                     val CategoryDetails: Fragment = CategoryDetailFragment()
-                                                  //  Log.d("id", "${args}")
                                                     val Bundle = Bundle()
                                                     Bundle.putString("id",CategoryImage_id)
                                                     CategoryDetails.arguments = Bundle
                                                     (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, CategoryDetails).addToBackStack("frag6").commit()
 
                                                 }
-
-
-
-
-
 
             }}}}
 

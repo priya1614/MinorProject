@@ -3,72 +3,85 @@
 package com.example.minorproject.view
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.minorproject.R
+import com.example.minorproject.util.ValidationUtils
+import com.example.minorproject.util.isNetworkAvailable
+import com.example.minorproject.viewmodel.LoginViewModel
+import com.example.minorproject.viewmodel.SignupViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.f_signup.*
 
 
-class SignUpFragment : Fragment() {
-    private lateinit var auth: FirebaseAuth
-    private lateinit var mStorageRef: StorageReference
-
-
+class SignUpFragment : Fragment(),View.OnClickListener,LifecycleOwner {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        auth = FirebaseAuth.getInstance()
+
         return inflater.inflate(R.layout.f_signup, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-       login.setOnClickListener {  (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()}
-
-        mStorageRef = FirebaseStorage.getInstance().getReference()
-        btn_signup_signup.setOnClickListener {
-            auth = FirebaseAuth.getInstance()
-            mStorageRef = FirebaseStorage.getInstance().getReference()
-            val Email = signup_email.text.toString()
-            val password = signup_password.text.toString()
-            val name = signup_name.text.toString()
-            if (name.isEmpty()) {
-                signup_name.error = "username can not be empty"
-
-            } else if (password.isEmpty()) {
-                signup_password.error = "password of atleast 6 character"
-            } else if (Email.isEmpty()) {
-                signup_email.error = "Fill valid email address"
-            } else {
-                auth.createUserWithEmailAndPassword(Email, password)
-                        .addOnCompleteListener { task ->
-                                            if (task.isSuccessful) {
-                                                val user: MutableMap<String, Any> = HashMap()
-                                                user["name"] = name
-                                                user["email"] = Email
-                                                user["password"] = password
-
-                                                val db = FirebaseFirestore.getInstance()
-                                                db.collection("user").document(auth.currentUser!!.uid).set(user as Map<String, Any>)
-
-                                                        .addOnSuccessListener { documentReference ->
-                                                            //Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                                                        }
-                                                (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()
-
-                                            }
-                                        }
-                                    }
-
-                            }
-
-                        }
+        setListeners()
+    }
+    private fun setListeners() {
+        login.setOnClickListener(this)
+        btn_signup_signup.setOnClickListener (this)
+    }
+    override fun onClick(view: View?) {
+        if (view == login)
+            (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()
+        if (view == btn_signup_signup) {
+            if (!context!!.isNetworkAvailable()) {
+                Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show()
             }
+            if (TextUtils.isEmpty(signup_name.text.toString())) {
+                // Email field is blank
+                signup_name.error = "name can not be null"
+
+            }
+            if (TextUtils.isEmpty(signup_email.text.toString())) {
+                // Email field is blank
+                signup_email.error = "email can not be null"
+
+            } else if (!ValidationUtils.isValidEmail(signup_email.text.toString())) {
+                // Invalid email id
+                signup_email.error = "Please enter correct email"
+
+            } else if (TextUtils.isEmpty(signup_password.text.toString())) {
+                // Empty password
+                signup_password.error = "password can not be null"
+
+            } else
+                gotoSignupObserver()
+        }
+    }
+        fun gotoSignupObserver()
+        {
+            val mViewModel= ViewModelProvider(this)[SignupViewModel::class.java]
+            mViewModel.onSignupClicked(signup_name.text.toString(),signup_email.text.toString(), signup_password.text.toString()).observe(this, Observer { Boolean->
+                if(Boolean==true) {
+                    goToHomeScreen()
+                }
+            })}
+
+    fun goToHomeScreen()
+    {
+        (context as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()
+    }
+    }
+
 
 
 

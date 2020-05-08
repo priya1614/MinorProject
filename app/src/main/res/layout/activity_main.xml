@@ -52,6 +52,8 @@
             android:background="@drawable/style"
             android:defaultFocusHighlightEnabled="true"
             android:hint="Email"
+            android:nextFocusDown="@+id/input_password"
+
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -61,6 +63,9 @@
 
 
         <EditText
+            android:nextFocusDown="@+id/btn_login"
+            android:nextFocusUp="@+id/input_email"
+            android:defaultFocusHighlightEnabled="true"
             android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -103,6 +108,7 @@
 
 
         <Button
+            android:defaultFocusHighlightEnabled="true"
             android:background="@drawable/style"
             android:backgroundTint="#009688"
             android:id="@+id/btn_signup"

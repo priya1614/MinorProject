@@ -36,14 +36,13 @@ class CategoryDetailAdapter(var context: Context, var arrayList: ArrayList<AddCa
                     .load(alphaChar.iconsChar)
                     .into(holder.binding.image2)
 
-        val id2 = alphaChar.id
-        val id1 = alphaChar.args
+        val fiebaseid_CategoryDetails = alphaChar.id
+        val firebaseId_Category = alphaChar.args
             holder.binding.image2.setOnClickListener {
-                Toast.makeText(context, "sucessful" + id2, Toast.LENGTH_SHORT).show()
                 val FullScreenImage: Fragment = FullScreenImageFragment()
                 val bundle = Bundle()
-                bundle.putString("id2", id2)
-                bundle.putString("id1", id1)
+                bundle.putString("id2", fiebaseid_CategoryDetails)
+                bundle.putString("id1", firebaseId_Category)
                 FullScreenImage.arguments = bundle
                 (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, FullScreenImage).addToBackStack("frag5").commit()
 

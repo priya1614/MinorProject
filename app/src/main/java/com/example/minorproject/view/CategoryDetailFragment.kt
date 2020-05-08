@@ -25,7 +25,7 @@ class CategoryDetailFragment:Fragment(){
             auth = FirebaseAuth.getInstance()
              category_id = arguments?.getString("id")
             val CategoryDetailViewModel = ViewModelProvider(this)[CategoryDetailViewModel::class.java]
-            CategoryDetailViewModel.getcategory(category_id!!).observe(this, Observer { arraylist ->
+            CategoryDetailViewModel.getCategoryDetail(category_id!!).observe(this, Observer { arraylist ->
                val  CategoryDetailAdapter= context?.let { CategoryDetailAdapter(it, arraylist) }
                val gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
                 recyclerview_category_detail?.layoutManager = gridLayoutManager

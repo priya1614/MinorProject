@@ -50,6 +50,7 @@
 
 
     <Button
+        android:background="@drawable/style_profile"
         android:gravity="center"
         android:foregroundGravity="center"
         android:id="@+id/btn_changeprofile"
@@ -58,12 +59,14 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
-        android:background="@android:color/holo_blue_light"
+       android:backgroundTint="#008677"
         android:textColor="@android:color/white"
         android:text="@string/change_profile_picture">
 
     </Button>
     <Button
+        android:background="@drawable/style_profile"
+        android:backgroundTint="#008677"
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,7 +74,7 @@
         android:layout_marginBottom="24dp"
         android:padding="12dp"
         android:text="@string/logout"
-        android:background="@android:color/holo_blue_light"
+
         android:textColor="@android:color/white"/>
 
 

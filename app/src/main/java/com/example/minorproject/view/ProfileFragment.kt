@@ -22,12 +22,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.profile.*
-
-
 class ProfileFragment : Fragment()
 {
-
-
     private var filePath: Uri? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
@@ -50,18 +46,11 @@ class ProfileFragment : Fragment()
                 Glide.with(this).load(imagurl).apply(RequestOptions.circleCropTransform())
                         .into(profile_imageview)
             }
-
-
-
             profile_email.setText(email).toString()
             profile_name.setText(name).toString()
-
-
-
         }
         return inflater.inflate(R.layout.profile, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mStorageRef = FirebaseStorage.getInstance().getReference()

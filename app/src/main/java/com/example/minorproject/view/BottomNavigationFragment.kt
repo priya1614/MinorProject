@@ -21,7 +21,7 @@ class BottomNavigationFragment :Fragment()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v=inflater.inflate(R.layout.f_bottom_navigation,container,false)
-        val nav=v?.findViewById(R.id.navi) as BottomNavigationView
+        val nav=v?.findViewById(R.id.bottom_navigation) as BottomNavigationView
 
 
         nav.setOnNavigationItemSelectedListener{item->

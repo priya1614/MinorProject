@@ -7,6 +7,20 @@
     tools:context=".view.AddCategoryFragment"
     android:background="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/engagement"
+        android:text="Add category image"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        android:textSize="40sp"
+        android:textStyle="bold">
+
+    </TextView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +33,7 @@
 
 
         <ImageView
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             app:layout_constraintTop_toBottomOf="@+id/ac_title"
             app:layout_constraintLeft_toLeftOf="@+id/ac_title"
             android:id="@+id/categoryimage"
@@ -30,9 +44,12 @@
             android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher_round"/>
         <Button
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
-
+            android:background="@drawable/style_profile"
+            android:backgroundTint="#009688"
             android:id="@+id/select_category_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,6 +59,10 @@
             
         </Button>
         <Button
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/style_profile"
+            android:backgroundTint="#009688"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:text="@string/add_category_image"
