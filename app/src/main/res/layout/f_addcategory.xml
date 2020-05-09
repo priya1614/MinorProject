@@ -9,15 +9,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
+        android:background="#009788"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/engagement"
+        android:fontFamily="sans-serif-light"
         android:text="Add category"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold">
 

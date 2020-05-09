@@ -15,20 +15,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.minorproject.R
 import com.example.minorproject.util.ValidationUtils
 import com.example.minorproject.util.isNetworkAvailable
-import com.example.minorproject.viewmodel.LoginViewModel
 import com.example.minorproject.viewmodel.SignupViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.f_signup.*
 
 
 class SignUpFragment : Fragment(),View.OnClickListener,LifecycleOwner {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.f_signup, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -18,8 +18,11 @@ android:background="#FFFFFF"
            />
 
         <Button
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:background="@drawable/style_profile"
             android:id="@+id/delete_image"
-            android:background="#000000"
+            android:backgroundTint="#000000"
             android:textSize="15sp"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="@+id/ac_imageview_fullscreen"

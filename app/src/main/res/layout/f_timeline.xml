@@ -9,8 +9,24 @@
     android:id="@+id/cl2"
 
     >
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:fontFamily="@font/engagement"
+        android:text="Timeline"
+        android:background="#009788"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        android:textSize="45sp"
+        android:textStyle="bold">
+
+    </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="55dp"
         android:id="@+id/timeline_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

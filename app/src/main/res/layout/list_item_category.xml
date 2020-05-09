@@ -7,8 +7,8 @@
             type="com.example.minorproject.model.AddCategoryModelClass"/>
     </data>
 <androidx.cardview.widget.CardView
-    android:layout_width="125dp"
-    android:layout_height="150dp"
+    android:layout_width="80dp"
+    android:layout_height="100dp"
     android:layout_margin="5dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
         >
         <TextView
             android:id="@+id/text"
+            android:background="?android:attr/detailsElementBackground"
             android:textAlignment="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:text="@{AddCategoryModelClass.alphaChar}"

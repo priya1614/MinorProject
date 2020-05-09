@@ -1,7 +1,7 @@
 package com.example.minorproject.view
 
+
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,11 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.minorproject.R
-
-
 import com.example.minorproject.databinding.ListItemTimelineBinding
 import com.example.minorproject.model.TimeLineModelClass
-import kotlin.collections.ArrayList
 
 class TimeLineAdapter(var context: Context, var arrayList: ArrayList<TimeLineModelClass>): RecyclerView.Adapter<TimeLineAdapter.ItemHolder >() {
 

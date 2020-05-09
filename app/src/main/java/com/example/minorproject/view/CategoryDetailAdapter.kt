@@ -4,13 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.minorproject.R
-
 import com.example.minorproject.databinding.ListItemCategorydetailBinding
 import com.example.minorproject.model.AddCategoryImageModelClass
 

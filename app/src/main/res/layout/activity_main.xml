@@ -19,12 +19,16 @@
         android:gravity="center"
         android:foregroundGravity="center"
         android:paddingRight="24dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+
+            android:backgroundTint="?android:attr/windowBackground"
             android:text="Welcome back"
-            android:textStyle="bold"
-            android:textColor="#000000">
+            android:textColor="#000000"
+            android:textStyle="bold">
 
         </TextView>
 
