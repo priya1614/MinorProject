@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:fontFamily="@font/engagement"
-        android:text="Timeline"
+        android:text="@string/timeline"
         android:background="#009788"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"

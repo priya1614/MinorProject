@@ -13,6 +13,8 @@ android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:focusableInTouchMode="true"
+
         android:background="#008677"
         app:itemIconTint="@android:color/black"
         app:itemTextColor="@android:color/black"

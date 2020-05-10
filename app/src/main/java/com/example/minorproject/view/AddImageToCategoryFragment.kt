@@ -16,7 +16,7 @@ import com.example.minorproject.viewmodel.AddImageToCategoryViewModel
 import kotlinx.android.synthetic.main.f_add_category_image.*
 
 
-class AddImageToCategoryFragment : Fragment(),View.OnClickListener,LifecycleOwner {
+class AddImageToCategoryFragment : Fragment(),LifecycleOwner {
 
     private var filePath: Uri? = null
     var CategoryImage_id:String?=null
@@ -29,27 +29,19 @@ class AddImageToCategoryFragment : Fragment(),View.OnClickListener,LifecycleOwne
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CategoryImage_id = arguments?.getString("id")
-        setListeners()
+        select_category_image.setOnClickListener { launchGallery() }
+        add_category_image_button.setOnClickListener {  progress_Bar_addcategoryimage.setVisibility(View.VISIBLE)
+            gotoObserver() }
     }
-    private fun setListeners() {
-        select_category_image.setOnClickListener(this)
-        add_category_image_button.setOnClickListener (this)
-    }
-    override fun onClick(view: View?) {
-        if (view == select_category_image)
-            launchGallery()
-        else if (view == add_category_image_button) {
-            gotoObserver()
-        }}
+
 fun gotoObserver() {
     val mViewModel= ViewModelProvider(this)[AddImageToCategoryViewModel::class.java]
     mViewModel.onAddCategoryImage(filePath!!,CategoryImage_id!!).observe(this, Observer { Boolean->
         if(Boolean==true) {
+            progress_Bar_addcategoryimage.setVisibility(View.INVISIBLE)
             gotoCategoryDetailImageFragment()
         }
     })}
-
-
     fun gotoCategoryDetailImageFragment() {
         val CategoryDetails: Fragment = CategoryDetailFragment()
         val Bundle = Bundle()
@@ -58,9 +50,6 @@ fun gotoObserver() {
         (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, CategoryDetails).addToBackStack("frag6").commit()
 
     }
-
-
-
     private fun launchGallery() {
         val intent = Intent()
         intent.type = "image/*"
@@ -76,9 +65,8 @@ fun gotoObserver() {
             }
 
             filePath = data.data
+            categoryimage.setImageURI(filePath)
 
         }
     }
-
-
 }

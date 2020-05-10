@@ -16,14 +16,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.minorproject.R
 import com.example.minorproject.viewmodel.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.profile.*
 
 class ProfileFragment : Fragment(),LifecycleOwner
 {
     private var filePath: Uri? = null
     private lateinit var auth: FirebaseAuth
-    private lateinit var mStorageRef: StorageReference
     companion object{
         var PICK_IMAGE_REQUEST=73
     }
@@ -47,6 +45,7 @@ class ProfileFragment : Fragment(),LifecycleOwner
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btn_logout.setOnClickListener {
+            auth = FirebaseAuth.getInstance()
             auth.signOut()
             val BottomNavigation:Fragment=BottomNavigationFragment()
             val MainActivity:Activity=MainActivity()
@@ -57,11 +56,14 @@ class ProfileFragment : Fragment(),LifecycleOwner
         profile_imageview.setOnClickListener {
                  launchGallery()
         }
-        btn_changeprofile.setOnClickListener { addphoto() }
+        btn_changeprofile.setOnClickListener {
+            progress_Bar_profile.setVisibility(View.VISIBLE)
+            addphoto() }
            }
         fun addphoto() {
             val mViewModel= ViewModelProvider(this)[ProfileViewModel::class.java]
             mViewModel.PropicPicChangedata(filePath!!).observe(this, Observer {it->
+                progress_Bar_profile.setVisibility(View.INVISIBLE)
                 profile_name.setText(it.name)
                 profile_email.setText(it.email)
                 if(it.imageUrl!=null)
@@ -88,6 +90,7 @@ class ProfileFragment : Fragment(),LifecycleOwner
             }
 
             filePath = data.data
+            profile_imageview.setImageURI(filePath)
 
         }
     }

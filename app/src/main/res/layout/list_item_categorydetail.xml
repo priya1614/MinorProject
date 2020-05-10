@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:id="@+id/image2"
             android:src="@{AddCategoryImageModelClass.iconsChar}"
-            >
+            android:contentDescription="@string/category_image">
 
         </ImageView>
     </LinearLayout>

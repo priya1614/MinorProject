@@ -4,14 +4,14 @@
     <string name="title_Category">Category</string>
     <string name="title_Timeline">Timeline</string>
     <string name="title_profile">profile</string>
-    <string name="signup">signup</string>
+    <string name="signup">Signup</string>
     <string name="name">name</string>
-    <string name="email">email</string>
-    <string name="password">password</string>
-    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
     <string name="enter_category_title_name">Enter Category Title name</string>
     <string name="select_category_image">select category image</string>
-    <string name="add_category">add category</string>
+    <string name="add_category">Add category</string>
     <string name="no_account_yet_create_one">No account yet? Create one</string>
     <string name="choose_profile_picture">choose profile picture</string>
     <string name="delete_image">Delete image</string>
@@ -21,7 +21,13 @@
     <string name="change_profile_picture">change profile picture</string>
     <string name="logout">LOGOUT</string>
     <string name="already_have_an_account">already have an account ?</string>
-
+    <string name="login">Login</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="category_image">category Image</string>
+    <string name="full_screen_image">full screen image</string>
+    <string name="back">back</string>
+    <string name="timeline">Timeline</string>
+    <string name="profile">profile</string>
 
 
 </resources>

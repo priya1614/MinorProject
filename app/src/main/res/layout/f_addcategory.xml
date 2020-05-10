@@ -11,14 +11,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="#009788"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:fontFamily="sans-serif-light"
-        android:text="Add category"
+        android:text="@string/add_category"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
-        android:textSize="40sp"
+        android:textSize="25sp"
         android:textStyle="bold">
 
     </TextView>
@@ -58,6 +58,7 @@
 
         </EditText>
     <Button
+
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
 
@@ -78,6 +79,7 @@
 
 
     <Button
+
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="@drawable/style_profile"
@@ -94,6 +96,20 @@
         app:srcCompat="@android:drawable/ic_input_add"
         app:layout_constraintTop_toBottomOf="@+id/ac_addimage"
         app:layout_constraintLeft_toLeftOf="@id/ac_addimage"/>
+
+
+        <ProgressBar
+            android:id="@+id/progress_Bar_addcategory"
+            android:visibility="invisible"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:indeterminate = "true"
+            android:max="100"
+            android:minWidth="200dp"
+            android:minHeight="50dp"
+            android:progress="0" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

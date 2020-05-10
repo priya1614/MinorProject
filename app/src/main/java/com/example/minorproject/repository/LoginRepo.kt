@@ -20,7 +20,6 @@ class LoginRepo ()
         auth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
-
                         val user = auth.getCurrentUser()
                          id.value=true
 

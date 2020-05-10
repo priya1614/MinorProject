@@ -23,12 +23,14 @@ class CategoryFragment : Fragment(),LifecycleOwner{
 
         val CategoryViewModel=ViewModelProvider(this)[CategoryViewModel::class.java]
         CategoryViewModel.getcategory().observe(this, Observer{arraylist->
-           val CategoryAdapter=context?.let { CategoryAdapter(it, arraylist!!) }
-           val gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
-            recyclerview?.layoutManager = gridLayoutManager
-            recyclerview?.adapter=CategoryAdapter
 
-        })
+                val CategoryAdapter = context?.let { CategoryAdapter(it, arraylist!!) }
+                val gridLayoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
+                recyclerview?.layoutManager = gridLayoutManager
+                recyclerview?.adapter = CategoryAdapter
+
+              })
+
 
         return v
     }

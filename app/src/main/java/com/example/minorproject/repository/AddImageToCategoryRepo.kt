@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -23,13 +24,13 @@ class AddImageToCategoryRepo {
     private lateinit var auth: FirebaseAuth
     private lateinit var mStorageRef: StorageReference
     fun AddImageToCategory(filePath:Uri,CategoryImage_id:String):MutableLiveData<Boolean> {
-        var booleanId=MutableLiveData<Boolean>()
+        val booleanId=MutableLiveData<Boolean>()
         auth = FirebaseAuth.getInstance()
         mStorageRef = FirebaseStorage.getInstance().getReference()
-        if (filePath != null) {
+
             val ref = mStorageRef.child("category detail image/" + CategoryImage_id)
 
-            val uploadTask = ref.putFile(filePath!!)
+            val uploadTask = ref.putFile(filePath)
             uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                 if (!task.isSuccessful) {
                     task.exception?.let {
@@ -50,7 +51,7 @@ class AddImageToCategoryRepo {
                     user["imageUrl"] = uri
 
                     val db = FirebaseFirestore.getInstance()
-                    db.collection("category image").document(CategoryImage_id!!).collection("category image details").add(user)
+                    db.collection("category image").document(CategoryImage_id).collection("category image details").add(user)
                             .addOnSuccessListener { DocumentReference ->
                                 booleanId.value=true
                                 val id = DocumentReference.id
@@ -63,7 +64,7 @@ class AddImageToCategoryRepo {
                             }
                 }
             }
-        }
+
         return booleanId
 
     }

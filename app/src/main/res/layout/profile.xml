@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="55dp"
     android:fontFamily="@font/engagement"
-    android:text="profile"
+    android:text="@string/profile"
     android:background="#009788"
     android:textAllCaps="false"
     android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -79,7 +79,7 @@
         android:id="@+id/btn_changeprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
        android:backgroundTint="#008677"
@@ -87,18 +87,30 @@
         android:text="@string/change_profile_picture">
 
     </Button>
+
     <Button
         android:background="@drawable/style_profile"
         android:backgroundTint="#008677"
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
         android:padding="12dp"
         android:text="@string/logout"
 
         android:textColor="@android:color/white"/>
+        <ProgressBar
+            android:id="@+id/progress_Bar_profile"
+            android:visibility="invisible"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:indeterminate = "true"
+            android:max="100"
+            android:minWidth="200dp"
+            android:minHeight="50dp"
+            android:progress="0" />
 
 </LinearLayout>
 

@@ -16,7 +16,7 @@ import com.example.minorproject.viewmodel.AddCategoryViewModel
 import kotlinx.android.synthetic.main.f_addcategory.*
 
 
-class AddCategoryFragment : Fragment(),View.OnClickListener,LifecycleOwner {
+class AddCategoryFragment : Fragment(),LifecycleOwner {
 
     private var filePath: Uri? = null
     companion object{
@@ -29,24 +29,19 @@ class AddCategoryFragment : Fragment(),View.OnClickListener,LifecycleOwner {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setListeners()
-    }
-    private fun setListeners() {
-        ac_addimage.setOnClickListener(this)
-        add_category_button.setOnClickListener (this)
-    }
-    override fun onClick(view: View?) {
-        if (view == ac_addimage)
-            launchGallery()
-        else if (view == add_category_button) {
+        ac_addimage.setOnClickListener { launchGallery() }
+        add_category_button.setOnClickListener {
+            progress_Bar_addcategory.setVisibility(View.VISIBLE)
             gotoObserver()
         }
+
     }
     fun gotoObserver()
     {
         val mViewModel= ViewModelProvider(this)[AddCategoryViewModel::class.java]
         mViewModel.onAddClick(filePath!!,ac_title.text.toString()).observe(this, Observer { Boolean->
             if(Boolean==true) {
+                progress_Bar_addcategory.setVisibility(View.INVISIBLE)
            gotoCategoryFragment()
             }
         })}
@@ -72,6 +67,8 @@ class AddCategoryFragment : Fragment(),View.OnClickListener,LifecycleOwner {
             }
 
              filePath = data.data
+            categoryimage_category.setImageURI(filePath)
+
         }
     }}
 

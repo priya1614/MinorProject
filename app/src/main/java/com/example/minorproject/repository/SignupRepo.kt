@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class SignupRepo {
     private lateinit var auth: FirebaseAuth
     fun SignUp(name:String,Email: String, password: String):MutableLiveData<Boolean> {
-        var id=MutableLiveData<Boolean>()
+        val booleanid=MutableLiveData<Boolean>()
         auth = FirebaseAuth.getInstance()
         auth.createUserWithEmailAndPassword(Email, password)
                 .addOnCompleteListener { task ->
@@ -22,12 +22,14 @@ class SignupRepo {
                         db.collection("user").document(auth.currentUser!!.uid).set(user)
 
                                 .addOnSuccessListener { documentReference ->
-                                    id.value=true
-                                    //Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                                }
 
+                                        booleanid.value = true
+
+
+
+                                    }
                     }
                 }
-        return id
+        return booleanid
     }
 }

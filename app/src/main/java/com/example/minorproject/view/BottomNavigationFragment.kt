@@ -15,7 +15,7 @@ class BottomNavigationFragment :Fragment()
         if(savedInstanceState==null)
         {
             val ProfileFragment:Fragment=ProfileFragment()
-            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,ProfileFragment).commit()
+            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,ProfileFragment).addToBackStack("5").commit()
 
         }
     }
@@ -28,17 +28,17 @@ class BottomNavigationFragment :Fragment()
             when(item.itemId){
                 R.id.navigation_category -> {
                     val CategoryFragment:Fragment=CategoryFragment()
-                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,CategoryFragment).commit()
+                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,CategoryFragment).addToBackStack("1").commit()
                     true
                 }
                 R.id.navigation_timeline-> {
                     val TimelineFragment:Fragment=TimelineFragment()
-                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,TimelineFragment).commit()
+                    (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,TimelineFragment).addToBackStack("2").commit()
                     true
                 }R.id.navigation_profile -> {
 
                 val ProfileFragment:Fragment=ProfileFragment()
-                (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,ProfileFragment).commit()
+                (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,ProfileFragment).addToBackStack("3").commit()
                 true
 
             }else -> false

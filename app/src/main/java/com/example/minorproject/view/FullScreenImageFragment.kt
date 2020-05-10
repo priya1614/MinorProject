@@ -49,7 +49,7 @@ class  FullScreenImageFragment :Fragment() {
             val bundle = Bundle()
             bundle.putString("id", category_id)
             CategoryDetail.arguments = bundle
-            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, CategoryDetail).commit()
+            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container, CategoryDetail).addToBackStack("frag10").commit()
         }
         }
 

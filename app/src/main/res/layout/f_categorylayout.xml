@@ -23,19 +23,17 @@
         android:textColor="#FFFFFF"
         android:textSize="45sp"
         android:textStyle="bold">
-
     </TextView>
-
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-       android:layout_marginTop="150dp"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="100dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
