@@ -60,6 +60,10 @@ class SignUpFragment : Fragment(),View.OnClickListener,LifecycleOwner {
             } else if (TextUtils.isEmpty(signup_password.text.toString())) {
                 signup_password.error = "password can not be null"
 
+            }
+            else if(signup_password.text.toString().length<6) {
+                signup_password.error = "password must have atleast 6 character"
+
             } else
                 progress_Bar_signup.setVisibility(View.VISIBLE)
                 gotoSignupObserver()
