@@ -24,9 +24,6 @@ class SignupRepo {
                                 .addOnSuccessListener { documentReference ->
 
                                         booleanid.value = true
-
-
-
                                     }
                     }
                 }

@@ -30,8 +30,6 @@ class CategoryFragment : Fragment(),LifecycleOwner{
                 recyclerview?.adapter = CategoryAdapter
 
               })
-
-
         return v
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,6 +39,5 @@ class CategoryFragment : Fragment(),LifecycleOwner{
             (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_container,AddCategory).addToBackStack("frag3").commit()
         }
     }
-
 }
 

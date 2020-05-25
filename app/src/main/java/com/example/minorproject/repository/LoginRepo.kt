@@ -15,8 +15,6 @@ class LoginRepo ()
     fun signIn(email: String, pwd: String):MutableLiveData<Boolean> {
         val id=MutableLiveData<Boolean>()
         auth = FirebaseAuth.getInstance()
-
-
         auth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
