@@ -36,3 +36,15 @@ Screen 6: Profile Screen
 Show user Name,  Email, Profile Pic
 Logout button
 Allow change of Profile Pic
+
+
+
+Screenshots
+
+![Screenshot from 2020-05-10 19-20-17](https://user-images.githubusercontent.com/60710081/81501457-1dee7b80-92f6-11ea-9bc3-52414339b4c7.png)
+![Screenshot from 2020-05-10 19-23-49](https://user-images.githubusercontent.com/60710081/81501516-6c9c1580-92f6-11ea-80ed-0661864b42a6.png)
+![Screenshot from 2020-05-10 19-24-13](https://user-images.githubusercontent.com/60710081/81501521-74f45080-92f6-11ea-83cd-db0b16c30578.png)
+![Screenshot from 2020-05-10 19-26-11](https://user-images.githubusercontent.com/60710081/81501526-7cb3f500-92f6-11ea-8b6d-a219f034ba7d.png)
+![Screenshot from 2020-05-10 19-24-41](https://user-images.githubusercontent.com/60710081/81501527-7cb3f500-92f6-11ea-93ec-217d8a46f3ce.png)
+![Screenshot from 2020-05-10 19-25-23](https://user-images.githubusercontent.com/60710081/81501529-8178a900-92f6-11ea-8d3a-5c6d62ac0c76.png)
+
